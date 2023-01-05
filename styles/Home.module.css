@@ -26,6 +26,8 @@
 }
 
 .description p {
+  display: flex;
+  flex-direction: row;
   position: relative;
   margin: 0;
   padding: 1rem;
@@ -97,7 +99,7 @@
 
 .center::before,
 .center::after {
-  content: '';
+  content: "";
   left: 50%;
   position: absolute;
   filter: blur(45px);
@@ -113,10 +115,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 75px;
-  height: 75px;
-  padding: 25px 10px;
-  margin-left: 16px;
+  width: 30px;
+  height: 30px;
+  padding: 8px 8px;
+  margin-left: 10px;
   transform: translateZ(0);
   border-radius: var(--border-radius);
   overflow: hidden;
@@ -125,7 +127,7 @@
 
 .thirteen::before,
 .thirteen::after {
-  content: '';
+  content: "";
   position: absolute;
   z-index: -1;
 }
