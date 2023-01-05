@@ -25,7 +25,10 @@ export default function Home() {
               By Simon Townley-Smith
             </a>
           </div>
-          <div className="h-[30px] flex flex-row items-center">
+          <a
+            className="h-[30px] flex flex-row items-center"
+            href="https://nextjs.org/"
+          >
             Powered by&nbsp;
             <Image
               className={styles.logo}
@@ -44,14 +47,14 @@ export default function Home() {
                 priority
               />
             </div>
-          </div>
+          </a>
         </div>
 
         <div className={styles.center}></div>
 
         <div className={styles.grid}>
           <a
-            href="http://localhost:3000/musings"
+            href="http://localhost:3000/musings/1"
             className={styles.card}
             target="_blank"
             rel="noopener noreferrer"
@@ -67,7 +70,7 @@ export default function Home() {
           </a>
 
           <a
-            href="http://localhost:3000/islands"
+            href="http://localhost:3000/islands/1"
             className={styles.card}
             target="_blank"
             rel="noopener noreferrer"
