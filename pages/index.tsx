@@ -52,7 +52,7 @@ export default function Home() {
         </div>
 
         {/* <div >className={styles.center}> */}
-        <div className="h-[400px] w-[400px] ">
+        <div className="h-[400px] w-[600px] ">
           <Graph />
         </div>
 
