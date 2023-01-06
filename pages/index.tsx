@@ -2,7 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import { Inter } from "@next/font/google";
 import styles from "../styles/Home.module.css";
-import Graph from "../components/graph";
+import Graph from "../components/graph.jsx";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -51,7 +51,8 @@ export default function Home() {
           </a>
         </div>
 
-        <div className={styles.center}>
+        {/* <div >className={styles.center}> */}
+        <div className="h-[400px] w-[400px] ">
           <Graph />
         </div>
 
