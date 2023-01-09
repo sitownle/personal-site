@@ -37,16 +37,9 @@ export default function Home() {
               alt="Next.js Logo"
               width={60}
               height={37}
-              priority
             />
             <div className={styles.thirteen}>
-              <Image
-                src="/thirteen.svg"
-                alt="13"
-                width={40}
-                height={21}
-                priority
-              />
+              <Image src="/thirteen.svg" alt="13" width={40} height={21} />
             </div>
           </a>
         </div>
@@ -58,13 +51,13 @@ export default function Home() {
 
         <div className={styles.grid}>
           <a
-            href="http://localhost:3000/musings/1"
+            href="http://localhost:3000/neurons/Software-Development"
             className={styles.card}
             target="_blank"
             rel="noopener noreferrer"
           >
             <h2 className={inter.className}>
-              Musings <span>-&gt;</span>
+              Neurons <span>-&gt;</span>
             </h2>
             <p className={inter.className}>
               My thoughts on transferable knowledge from my domains of interest:
@@ -74,7 +67,7 @@ export default function Home() {
           </a>
 
           <a
-            href="http://localhost:3000/islands/1"
+            href="http://localhost:3000/islands/Volleyball"
             className={styles.card}
             target="_blank"
             rel="noopener noreferrer"
