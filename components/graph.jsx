@@ -1,6 +1,5 @@
 /* eslint-disable */
-import * as THREE from "three";
-import * as React from "react";
+import { Vector3, QuadraticBezierCurve3 } from "three";
 import { useRef, useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { Canvas, useFrame } from "@react-three/fiber";
@@ -84,10 +83,10 @@ function Connection(props) {
     >
       <tubeGeometry
         args={[
-          new THREE.QuadraticBezierCurve3(
-            new THREE.Vector3(-props.size, 0, 0),
-            new THREE.Vector3(0, props.size, 0),
-            new THREE.Vector3(props.size, 0, 0)
+          new /*THREE.*/ QuadraticBezierCurve3(
+            new /*THREE.*/ Vector3(-props.size, 0, 0),
+            new /*THREE.*/ Vector3(0, props.size, 0),
+            new /*THREE.*/ Vector3(props.size, 0, 0)
           ),
           64,
           0.3
@@ -119,7 +118,7 @@ export default function Graph() {
           {`https://sitownle.com/neurons/${link}`}
         </div>
       ) : null}
-      <Canvas camera={{ position: new THREE.Vector3(0, 0, 12) }}>
+      <Canvas camera={{ position: new /*THREE.*/ Vector3(0, 0, 12) }}>
         <ambientLight intensity={0.5} />
         <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
         <pointLight position={[-10, -10, -10]} />
