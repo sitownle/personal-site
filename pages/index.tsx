@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
+import Link from "next/link";
 import { Inter } from "@next/font/google";
 import styles from "../styles/Home.module.css";
 import Graph from "../components/graph.jsx";
@@ -66,8 +67,8 @@ export default function Home() {
             /*styles.grid*/ "grid grid-cols-4 w-[1100px] max-w-[100%] "
           }
         >
-          <a
-            href="http://localhost:3000/neurons/Software-Development"
+          <Link
+            href="/neurons/Software-Development"
             className={
               /*styles.card*/ "group py-4 px-[1.2rem] rounded-xl bg-[rgb(180, 185, 188)] border border-black hover:border-slate-300/20 hover:bg-slate-700/20"
             }
@@ -90,21 +91,21 @@ export default function Home() {
               machine learning, software development, evolutionary biology, and
               more.
             </p>
-          </a>
+          </Link>
 
-          <a
-            href="http://localhost:3000/islands/Volleyball"
+          <Link
+            href="/islands/Volleyball"
             className={styles.card}
             target="_blank"
             rel="noopener noreferrer"
           >
             <h2 className={inter.className}>
-              Thought Islands <span>-&gt;</span>
+              Thought Islands <span>&#10132;</span>
             </h2>
             <p className={inter.className}>
               Less transferable thoughts from my hobbies, primarily sports.
             </p>
-          </a>
+          </Link>
 
           <a
             href="https://github.com/sitownle"
@@ -113,7 +114,7 @@ export default function Home() {
             rel="noopener noreferrer"
           >
             <h2 className={inter.className}>
-              My Github <span>-&gt;</span>
+              My Github <span>&#10132;</span>
             </h2>
             <p className={inter.className}>
               Explore this and other projects inspired by my work at rays.ai.
@@ -127,7 +128,7 @@ export default function Home() {
             rel="noopener noreferrer"
           >
             <h2 className={inter.className}>
-              rays.ai <span>-&gt;</span>
+              rays.ai <span>&#10132;</span>
             </h2>
             <p className={inter.className}>
               If they ever allow public accounts check out what I built over

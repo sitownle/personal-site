@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Link from "next/link";
 import { useRouter } from "next/router";
 
 const neurons = {
@@ -105,35 +106,40 @@ const neurons = {
 
 const synapses = {
   "Software-Development": {
-    "Machine-Learning": "Coding, Policy Evolution",
+    "Machine-Learning": "Coding, Policy Evolution, Gradient Clipping",
     "Evolutionary-Biology": "Biodiversity",
     "Probability-&-Statistics": "Law of Large Numbers, Antifragility",
     Government:
       "Collaborative Policy Evolution (good coding practices), Microservices"
   },
   "Machine-Learning": {
-    "Software-Development": "Coding, Policy Evolution",
-    "Evolutionary-Biology": "",
-    "Probability-&-Statistics": "",
-    Government: ""
+    "Software-Development": "Coding, Policy Evolution, Gradient Clipping",
+    "Evolutionary-Biology":
+      "Policy Evolution, Multi-Agent Systems, Convergent/Divergent Evolution",
+    "Probability-&-Statistics":
+      "Antifragility, Mathematical Optimization, Unsupervised Learning",
+    Government: "Gradient Clipping"
   },
   "Evolutionary-Biology": {
     "Software-Development": "Biodiversity",
-    "Machine-Learning": "",
-    "Probability-&-Statistics": "",
-    Government: ""
+    "Machine-Learning":
+      "Policy Evolution, Multi-Agent Systems, Convergent/Divergent Evolution",
+    "Probability-&-Statistics": "Antifragility",
+    Government: "Macroevolution"
   },
   "Probability-&-Statistics": {
-    "Software-Development": "",
-    "Machine-Learning": "",
+    "Software-Development": "Law of Large Numbers, Antifragility",
+    "Machine-Learning":
+      "Antifragility, Mathematical Optimization, Unsupervised Learning",
     "Evolutionary-Biology": "Antifragility",
-    Government: ""
+    Government: "Antifragility"
   },
   Government: {
-    "Software-Development": "",
-    "Machine-Learning": "",
-    "Evolutionary-Biology": "",
-    "Probability-&-Statistics": ""
+    "Software-Development":
+      "Collaborative Policy Evolution (good coding practices), Microservices",
+    "Machine-Learning": "Gradient Clipping",
+    "Evolutionary-Biology": "Macroevolution",
+    "Probability-&-Statistics": "Antifragility"
   }
 };
 
@@ -148,7 +154,7 @@ const Musing = () => {
 
   function Synapse({ neuron }) {
     return title ? (
-      <a
+      <Link
         href={`/neurons/${neuron}`}
         className="group h-[20vh] p-4 flex flex-col gap-4 rounded text-slate-400 hover:text-slate-200 hover:bg-slate-700 cursor-pointer transition-all border border-slate-900 hover:border-slate-500"
       >
@@ -157,7 +163,7 @@ const Musing = () => {
           <p className="group-hover:translate-x-[4px]">&#10132;</p>
         </div>
         <p>Connecting Concepts: {synapses[title][neuron]}</p>
-      </a>
+      </Link>
     ) : null;
   }
 
@@ -171,7 +177,7 @@ const Musing = () => {
       </Head>
       <div className="min-h-[100vh] w-full bg-slate-900 text-slate-200 flex flex-row gap-4">
         <div className="w-1/4 flex flex-col gap-4">
-          <a
+          <Link
             href="/"
             className="group bg-slate-500 text-slate-100 hover:bg-slate-100 hover:text-slate-500 transition-colors w-[200px] text-center rounded-sm ml-4 mt-4 px-2 flex pl-16"
           >
@@ -179,7 +185,7 @@ const Musing = () => {
               &#10132;
             </p>
             Home
-          </a>
+          </Link>
           <div className="flex">
             <span className="pl-4 w-[230px]">Explore Connected Neurons </span>
             <p className="rotate-90 w-[10px]">&#10132;</p>
