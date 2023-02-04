@@ -1,11 +1,8 @@
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import { Inter } from "@next/font/google";
 import styles from "../styles/Home.module.css";
 import Graph from "../components/graph.jsx";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   return (
@@ -35,7 +32,7 @@ export default function Home() {
           >
             Powered by&nbsp;
             <Image
-              className={/*styles.logo*/ "relative invert drop-shadow-md"}
+              className={"relative invert drop-shadow-md"}
               src="/next.svg"
               alt="Next.js Logo"
               width={60}
@@ -70,39 +67,27 @@ export default function Home() {
           <Link
             href="/neurons/Software-Development"
             className={
-              /*styles.card*/ "group py-4 px-[1.2rem] rounded-xl bg-[rgb(180, 185, 188)] border border-black hover:border-slate-300/20 hover:bg-slate-700/20"
+              "group py-4 px-[1.2rem] rounded-xl bg-[rgb(180, 185, 188)] border border-black hover:border-slate-300/20 hover:bg-slate-700/20"
             }
-            target="_blank"
-            rel="noopener noreferrer"
           >
-            <h2 className={/*inter.className*/ "font-semibold mb-[0.7rem]"}>
+            <h2 className="font-semibold mb-[0.7rem]">
               Neurons
               <span className=" ml-[6px] inline-block transition-all group-hover:translate-x-[4px]">
                 &#10132;
-                {/*-&gt;*/}
               </span>
             </h2>
-            <p
-              className={
-                /*inter.className*/ "m-0 text-sm leading-6 opacity-60 max-w-[30ch]"
-              }
-            >
+            <p className="m-0 text-sm leading-6 opacity-60 max-w-[30ch]">
               My thoughts on transferable knowledge from my domains of interest:
               machine learning, software development, evolutionary biology, and
               more.
             </p>
           </Link>
 
-          <Link
-            href="/islands/Volleyball"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
+          <Link href="/islands/Volleyball" className={styles.card}>
+            <h2 className="font-semibold mb-[0.7rem]">
               Thought Islands <span>&#10132;</span>
             </h2>
-            <p className={inter.className}>
+            <p className="m-0 text-sm leading-6 opacity-60 max-w-[30ch]">
               Less transferable thoughts from my hobbies, primarily sports.
             </p>
           </Link>
@@ -113,10 +98,10 @@ export default function Home() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <h2 className={inter.className}>
+            <h2 className="font-semibold mb-[0.7rem]">
               My Github <span>&#10132;</span>
             </h2>
-            <p className={inter.className}>
+            <p className="m-0 text-sm leading-6 opacity-60 max-w-[30ch]">
               Explore this and other projects inspired by my work at rays.ai.
             </p>
           </a>
@@ -127,10 +112,10 @@ export default function Home() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <h2 className={inter.className}>
+            <h2 className="font-semibold mb-[0.7rem]">
               rays.ai <span>&#10132;</span>
             </h2>
-            <p className={inter.className}>
+            <p className="m-0 text-sm leading-6 opacity-60 max-w-[30ch]">
               If they ever allow public accounts check out what I built over
               there!
             </p>
