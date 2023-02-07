@@ -4,6 +4,7 @@ import { useState, useRef } from "react";
 const AutoResize = () => {
   const [toggle, targ] = useAutoResize("width");
 
+  // TODO: add vertical direction, add config to root at opposite end, make param object so some can be omitted easily
   function useAutoResize(orientation) {
     const [isExpanded, setIsExpanded] = useState(true);
     const targ = useRef();
