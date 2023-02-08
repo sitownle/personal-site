@@ -106,20 +106,14 @@ export default function Home() {
             </p>
           </a>
 
-          <a
-            href="https://rays.ai"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <Link href="/experimental" className={styles.card}>
             <h2 className="font-semibold mb-[0.7rem]">
-              rays.ai <span>&#10132;</span>
+              My Projects <span>&#10132;</span>
             </h2>
             <p className="m-0 text-sm leading-6 opacity-60 max-w-[30ch]">
-              If they ever allow public accounts check out what I built over
-              there!
+              Check out my past work and current projects in action.
             </p>
-          </a>
+          </Link>
         </div>
       </main>
     </>

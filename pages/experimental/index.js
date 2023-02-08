@@ -25,12 +25,14 @@ const ProjectIndex = () => {
           <a
             href={links[project]}
             className="group p-4 flex flex-col gap-4 rounded text-slate-400 hover:text-slate-200 hover:bg-slate-700 cursor-pointer transition-all border border-slate-900 hover:border-slate-500"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             <div className="flex gap-[4px]">
               <p>{project}</p>
               <p className="group-hover:translate-x-[4px]">&#10132;</p>
             </div>
-            <p className="text-sm pl-2">{descriptions[project]}</p>
+            <p className="text-sm pl-10">{descriptions[project]}</p>
           </a>
         );
       return (
@@ -42,7 +44,7 @@ const ProjectIndex = () => {
             <p>{project}</p>
             <p className="group-hover:translate-x-[4px]">&#10132;</p>
           </div>
-          <p className="text-sm pl-2">{descriptions[project]}</p>
+          <p className="text-sm pl-10">{descriptions[project]}</p>
         </Link>
       );
     }
