@@ -107,7 +107,7 @@ const AutoResize = () => {
           <div
             id="TARGET"
             ref={targ}
-            className="flex flex-col p-2 gap-4 border border-slate-100 rounded text-center overflow-hidden"
+            className="mt-10 mb-2 flex flex-col p-2 gap-4 border border-slate-100 rounded text-center overflow-hidden"
           >
             {"Resize me to the left!"}
           </div>
@@ -116,7 +116,7 @@ const AutoResize = () => {
           </button>
           <div
             ref={targRight}
-            className="flex flex-col p-2 gap-4 border border-slate-100 rounded text-center overflow-hidden"
+            className="my-2 flex flex-col p-2 gap-4 border border-slate-100 rounded text-center overflow-hidden"
           >
             {"Resize me to the right!"}
           </div>
@@ -128,7 +128,7 @@ const AutoResize = () => {
           </button>
           <div
             ref={targUp}
-            className="flex flex-col p-2 gap-4 border border-slate-100 rounded text-center overflow-hidden"
+            className="my-2 flex flex-col p-2 gap-4 border border-slate-100 rounded text-center overflow-hidden"
           >
             {"Resize me to the top!"}
           </div>
@@ -140,7 +140,7 @@ const AutoResize = () => {
           </button>
           <div
             ref={targDown}
-            className="flex flex-col p-2 gap-4 border border-slate-100 rounded text-center overflow-hidden"
+            className="my-2 flex flex-col p-2 gap-4 border border-slate-100 rounded text-center overflow-hidden"
           >
             {"Resize me to the bottom!"}
           </div>

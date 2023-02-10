@@ -1,70 +1,49 @@
-import { useState, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 
-// TODO: Smooth out repositioning, prevent spam halfsize error, test in other layouts
 export default function useAutoResize(config) {
   const [isExpanded, setIsExpanded] = useState(true);
   const targ = useRef();
   const expandedW = useRef(0);
-  const dir = config.direction.toLowerCase();
+  const dir = config?.direction.toLowerCase();
+  const o = config?.orientation.toLowerCase();
+  //const opacity = config?.opacity;
+  //const minH = config?.minHeight;
+
+  useEffect(() => {
+    //console.log(targ.current);
+    targ.current.style.transition = "all 0.25s ease";
+    if (o == "height")
+      targ.current.style.maxWidth = `${targ.current.offsetWidth + 5}px`;
+    else targ.current.style.maxHeight = `${targ.current.offsetHeight}px`;
+    targ.current.style.whiteSpace = "nowrap";
+    expandedW.current =
+      o == "height" ? targ.current.offsetHeight : targ.current.offsetWidth;
+  }, []);
 
   function toggle() {
+    let orient = o == "height" ? "height" : "width";
     if (targ.current) {
-      targ.current.style.transition = "all 0.25s linear";
-      targ.current.style.maxHeight = `${targ.current.offsetHeight}px`;
-      targ.current.style.whiteSpace = "nowrap";
       if (isExpanded) {
-        expandedW.current =
-          expandedW.current == 0 ? targ.current.offsetWidth : expandedW.current;
-        targ.current.style.width = 0;
+        targ.current.style[orient] = 0;
         if (dir == "right")
           targ.current.style.transform = `translateX(${expandedW.current}px)`;
-        targ.current.style.opacity = 0;
-        setIsExpanded(false);
-      } else {
-        targ.current.style.width = expandedW.current.toString() + "px";
-        if (dir == "right") targ.current.style.transform = "translateX(0px)";
-        targ.current.style.opacity = 1;
-        setIsExpanded(true);
-      }
-    }
-    return;
-  }
-
-  function toggleVert() {
-    if (targ.current) {
-      targ.current.style.transition = "all 0.25s linear";
-      targ.current.style.maxWidth = `${targ.current.offsetWidth + 5}px`;
-      if (isExpanded) {
-        expandedW.current =
-          expandedW.current == 0
-            ? targ.current.offsetHeight
-            : expandedW.current;
-        targ.current.style.height = 0;
         if (dir == "down")
           targ.current.style.transform = `translateY(${expandedW.current}px)`;
         targ.current.style.opacity = 0;
         setIsExpanded(false);
       } else {
-        targ.current.style.height = expandedW.current.toString() + "px";
-        if (dir == "down") {
-          targ.current.style.transform = "translateY(0px)";
-        }
+        targ.current.style[orient] = expandedW.current.toString() + "px";
+        if (dir == "right") targ.current.style.transform = "translateX(0px)";
+        if (dir == "down") targ.current.style.transform = "translateY(0px)";
         targ.current.style.opacity = 1;
         setIsExpanded(true);
       }
     }
-    return;
   }
 
-  let o = config.orientation.toLowerCase();
-  if (o == "width" || o == "horizontal") {
-    return [toggle, targ];
-  }
-  if (o == "height" || o == "vertical") {
-    return [toggleVert, targ];
-  }
+  return [toggle, targ];
 
-  throw new Error(
-    "INVALID ORIENTATION ERROR: Orientation must be 'width', 'height', 'horizontal', or 'vertical', and Direction must be 'up', 'down', 'left', or 'right'"
-  );
+  //   throw new Error(
+  //     "INVALID ORIENTATION ERROR: Orientation must be 'width', 'height', 'horizontal', or 'vertical', and Direction must be 'up', 'down', 'left', or 'right'"
+  //   );
 }
