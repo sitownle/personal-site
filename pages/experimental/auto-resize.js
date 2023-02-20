@@ -20,77 +20,6 @@ const AutoResize = () => {
     direction: "up"
   });
 
-  // function useAutoResize(config) {
-  //   const [isExpanded, setIsExpanded] = useState(true);
-  //   const targ = useRef();
-  //   const expandedW = useRef(0);
-  //   const dir = config.direction.toLowerCase();
-
-  //   function toggle() {
-  //     if (targ.current) {
-  //       targ.current.style.transition = "all 0.25s linear";
-  //       if (isExpanded) {
-  //         expandedW.current =
-  //           expandedW.current == 0
-  //             ? targ.current.offsetWidth
-  //             : expandedW.current;
-  //         targ.current.style.width = 0;
-  //         if (dir == "right") {
-  //           let newW = parseFloat(targ.current.offsetLeft) + expandedW.current;
-  //           targ.current.style.transform = `translateX(${newW}px)`;
-  //         }
-  //         targ.current.style.opacity = 0;
-  //         setIsExpanded(false);
-  //       } else {
-  //         targ.current.style.width = expandedW.current.toString() + "px";
-  //         if (dir == "right") targ.current.style.transform = "translateX(0px)";
-  //         targ.current.style.opacity = 1;
-  //         setIsExpanded(true);
-  //       }
-  //     }
-  //     return;
-  //   }
-
-  //   function toggleVert() {
-  //     if (targ.current) {
-  //       targ.current.style.transition = "all 0.25s linear";
-  //       if (isExpanded) {
-  //         expandedW.current =
-  //           expandedW.current == 0
-  //             ? targ.current.offsetHeight
-  //             : expandedW.current;
-  //         targ.current.style.height = 0;
-  //         if (dir == "down") {
-  //           let newH = expandedW.current;
-  //           targ.current.style.transform = `translateY(${newH}px)`;
-  //         }
-  //         targ.current.style.opacity = 0;
-  //         setIsExpanded(false);
-  //       } else {
-  //         targ.current.style.height = expandedW.current.toString() + "px";
-  //         if (dir == "down") {
-  //           targ.current.style.transform = "translateY(0px)";
-  //         }
-  //         targ.current.style.opacity = 1;
-  //         setIsExpanded(true);
-  //       }
-  //     }
-  //     return;
-  //   }
-
-  //   let o = config.orientation.toLowerCase();
-  //   if (o == "width" || o == "horizontal") {
-  //     return [toggle, targ];
-  //   }
-  //   if (o == "height" || o == "vertical") {
-  //     return [toggleVert, targ];
-  //   }
-
-  //   throw new Error(
-  //     "INVALID ORIENTATION ERROR: Orientation must be 'width', 'height', 'horizontal', or 'vertical', and direction must be 'up', 'down', 'left', or 'right'"
-  //   );
-  // }
-
   return (
     <>
       <Head>
@@ -102,53 +31,59 @@ const AutoResize = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="min-h-[100vh] w-full bg-slate-900 text-slate-200 flex flex-col items-center gap-4">
+      <div className="min-h-[100vh] w-full bg-slate-900 text-slate-200">
         <div>
+          <p className="pt-4 mb-4 text-center px-4">
+            Click any of the buttons to see useAutoResize in action!
+          </p>
           <div
             id="TARGET"
             ref={targ}
-            className="mt-10 mb-2 flex flex-col p-2 gap-4 border border-slate-100 rounded text-center overflow-hidden"
+            className="bg-gradient-to-l from-slate-900 to-green-900 mb-4 flex flex-col p-2 gap-4 border border-green-200 text-green-200 rounded text-center overflow-hidden cursor-default"
           >
-            {"Resize me to the left!"}
+            {"Resize me to the left"}
           </div>
-          <button onClick={toggle} className="border border-white rounded p-1">
-            {"Toggle"}
+          <button
+            onClick={toggle}
+            className="hover:bg-gradient-to-l hover:from-slate-900 hover:to-green-900 bg-gradient-to-l from-slate-200 to-green-200 border hover:border-green-200 hover:text-green-100 bg-green-200 border-green-900 text-green-900 transition-all rounded p-1 ml-[38%] md:ml-[45.5%] mb-10 hover:translate-x-[-4px]"
+          >
+            {"Toggle Left!"}
           </button>
           <div
             ref={targRight}
-            className="my-2 flex flex-col p-2 gap-4 border border-slate-100 rounded text-center overflow-hidden"
+            className="bg-gradient-to-r from-slate-900 to-blue-900 mb-4 flex flex-col p-2 gap-4 border border-blue-200 text-blue-200 rounded text-center overflow-hidden cursor-default"
           >
-            {"Resize me to the right!"}
+            {"Resize me to the right"}
           </div>
           <button
             onClick={toggleRight}
-            className="border border-white rounded p-1"
+            className="hover:bg-gradient-to-r hover:from-slate-900 hover:to-blue-900 bg-gradient-to-r from-slate-200 to-blue-200 ml-[37%] md:ml-[45%] mb-10 border border-blue-200 text-blue-900 hover:bg-blue-200 hover:border-blue-200 hover:text-blue-200 transition-all rounded p-1 hover:translate-x-[4px]"
           >
             {"Toggle Right!"}
           </button>
           <div
             ref={targUp}
-            className="my-2 flex flex-col p-2 gap-4 border border-slate-100 rounded text-center overflow-hidden"
+            className="bg-gradient-to-t from-slate-900 to-indigo-900 mb-4 flex flex-col p-2 gap-4 border border-indigo-200 text-indigo-200 rounded text-center overflow-hidden cursor-default"
           >
-            {"Resize me to the top!"}
+            {"Resize me to the top"}
           </div>
           <button
             onClick={toggleUp}
-            className=" border border-white rounded p-1"
+            className="hover:bg-gradient-to-t hover:from-slate-900 hover:to-indigo-900 bg-gradient-to-t from-slate-200 to-indigo-200 ml-[40%] md:ml-[46%] mb-10 border border-indigo-200 text-indigo-900 hover:border-indigo-200 hover:text-indigo-100 transition-all rounded p-1 hover:translate-y-[-4px]"
           >
             {"Toggle Up!"}
           </button>
           <div
             ref={targDown}
-            className="my-2 flex flex-col p-2 gap-4 border border-slate-100 rounded text-center overflow-hidden"
+            className="bg-gradient-to-b from-slate-900 to-violet-900 mb-4 flex flex-col p-2 gap-4 border border-indigo-200 text-indigo-200 rounded text-center overflow-hidden cursor-default"
           >
-            {"Resize me to the bottom!"}
+            {"Resize me to the bottom"}
           </div>
           <button
             onClick={toggleDown}
-            className=" border border-white rounded p-1"
+            className="hover:bg-gradient-to-b hover:from-slate-900 hover:to-violet-900 bg-gradient-to-b from-slate-200 to-violet-200 ml-[37%] md:ml-[45%] mb-10 border border-violet-300 text-violet-900 hover:border-violet-300 hover:text-violet-200 transition-all rounded p-1 hover:border-slate-900 hover:text-slate-900 hover:bg-slate-200 transition-all hover:translate-y-[4px]"
           >
-            {"Toggle Down"}
+            {"Toggle Down!"}
           </button>
         </div>
       </div>
