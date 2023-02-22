@@ -7,14 +7,14 @@ const descriptions = {
   "auto-resize":
     "A small hook inspired by useAutoAnimate to simplify the animation I find myself reaching for often, but find more difficult to implement in my normal tailwind workflow",
   enchrome:
-    "A password encryption chrome extension that provides an extra level of security for all levels of users",
+    "A password encryption chrome extension that provides an extra level of security for users at all levels of security consciousness",
   "rays.ai":
     "My first job! I built, deployed, and managed all parts of the website, the most significant of which was the graphical editor for optical design exploration with collaborative editing, unlimited undo/redo and a microservice written in golang for powering ray tracing computations"
 };
 
 const ProjectIndex = () => {
   function changeCase(origStr) {
-    return origStr?.replace(/-/g, " ");
+    return origStr ? origStr.replace(/-/g, " ") : "";
   }
 
   function Bridge({ project }) {

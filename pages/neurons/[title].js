@@ -179,7 +179,7 @@ const Musing = () => {
         <div className="w-1/4 flex flex-col gap-4">
           <Link
             href="/"
-            className="group bg-slate-500 text-slate-100 hover:bg-slate-100 hover:text-slate-500 transition-colors w-[200px] text-center rounded-sm ml-4 mt-4 px-2 flex pl-16"
+            className="group bg-slate-600 text-slate-100 hover:bg-slate-100 hover:text-slate-500 transition-colors w-[200px] text-center rounded-sm ml-4 mt-4 px-2 flex pl-16"
           >
             <p className="rotate-180 w-[10px] text-slate-500 group-hover:translate-x-[-4px]">
               &#10132;

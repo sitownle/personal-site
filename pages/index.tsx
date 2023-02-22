@@ -1,8 +1,13 @@
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import styles from "../styles/Home.module.css";
-import Graph from "../components/graph.jsx";
+const Graph = dynamic(() => import("../components/graph.jsx"), {
+  loading: () => (
+    <div className="animate-fill bg-gradient-to-l from-cyan-400 to-black border-r border-cyan-400 h-[50px] mt-24 shadow-[11px_0px_6px_5px_cyan-400] shadow-cyan-400" />
+  )
+});
 
 export default function Home() {
   return (
@@ -54,16 +59,11 @@ export default function Home() {
           </a>
         </div>
 
-        {/* <div >className={styles.center}> */}
         <div className="h-[400px] w-[600px] ">
           <Graph />
         </div>
 
-        <div
-          className={
-            /*styles.grid*/ "grid grid-cols-4 w-[1100px] max-w-[100%] "
-          }
-        >
+        <div className={"grid grid-cols-4 w-[1100px] max-w-[100%] "}>
           <Link
             href="/neurons/Software-Development"
             className={

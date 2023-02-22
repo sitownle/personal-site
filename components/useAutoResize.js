@@ -4,7 +4,7 @@ export default function useAutoResize(config) {
   const [isExpanded, setIsExpanded] = useState(true);
   const targ = useRef();
   const expandedW = useRef(0);
-  const dir = config?.direction.toLowerCase();
+  const dir = config ? config.direction.toLowerCase() : "left";
   const o = dir == "up" || dir == "down" ? "height" : "width";
   //const o = config?.orientation.toLowerCase();
   //const opacity = config?.opacity;
