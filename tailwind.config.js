@@ -7,16 +7,16 @@ module.exports = {
   theme: {
     extend: {
       animation: {
-        fill: "fill 5s infinite"
+        fill: "fill 5s linear infinite"
       },
       keyframes: {
         fill: {
-          "0%": { width: "0%" },
-          "33%": { width: "20%" },
-          "50%": { width: "40%" },
-          "66%": { width: "60%" },
-          "80%": { width: "75%" },
-          "100%": { width: "80%" }
+          "0%": { transform: "scaleX(1)" },
+          "33%": { transform: "scaleX(1.5)" },
+          "50%": { transform: "scaleX(2)" },
+          "66%": { transform: "scaleX(0.5)" },
+          "80%": { transform: "scaleX(1.5)" },
+          "100%": { transform: "scaleX(1)" }
         }
       }
     }
