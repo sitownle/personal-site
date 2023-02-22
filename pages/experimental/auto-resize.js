@@ -11,10 +11,10 @@ const AutoResize = () => {
     direction: "right"
   });
   const [toggleDown, targDown] = useAutoResize({
-    direction: "down"
+    direction: "bottom"
   });
   const [toggleUp, targUp] = useAutoResize({
-    direction: "up"
+    direction: "top"
   });
 
   return (
@@ -40,7 +40,6 @@ const AutoResize = () => {
             Click any of the buttons to see useAutoResize in action!
           </p>
           <div
-            id="TARGET"
             ref={targ}
             className="bg-gradient-to-l from-slate-900 to-green-900 mb-4 flex flex-col p-2 gap-4 border border-green-200 text-green-200 rounded text-center overflow-hidden cursor-default"
           >
@@ -91,8 +90,8 @@ const AutoResize = () => {
         </div>
         <p className="w-1/2 mx-auto pb-4 text-slate-300">
           So how does it work? Here's the code for the first demo (minus all the
-          unnecessary styles). Simply replace "left" with any other of the 4
-          directions to achieve the behavior of the other demos.
+          unnecessary styles). Simply replace "left" with "right", "top", or
+          "bottom" to achieve the behavior of the other demos.
         </p>
         <pre className="bg-black p-4 text-slate-200 text-sm w-1/2 mx-auto rounded-lg text-left whitespace-pre-wrap">
           {
