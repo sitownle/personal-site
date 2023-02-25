@@ -1,11 +1,12 @@
 import Head from "next/head";
 import Link from "next/link";
-import { useState, useRef } from "react";
-import useAutoResize from "../../components/useAutoResize.js";
+import useAutoResize from "@sitownle/use-auto-resize";
+//import useAutoResize from "../../components/useAutoResize.js";
 
 const AutoResize = () => {
   const [toggle, targ] = useAutoResize({
-    direction: "left"
+    direction: "left",
+    opacity: true
   });
   const [toggleRight, targRight] = useAutoResize({
     direction: "right"
