@@ -20,7 +20,7 @@ const Enchrome = () => {
         >
           {"<< Projects Home"}
         </Link>
-        <div className="pt-10 w-1/2 flex flex-col gap-4">
+        <div className="pt-12 md:w-1/2 w-[90%] flex flex-col gap-4">
           <p>
             Enchrome is a password encryption extension that helps secure your
             passwords without storing them. By only storing the encryption
@@ -48,6 +48,11 @@ const Enchrome = () => {
               here
             </Link>
           </div>
+          <input
+            type="password"
+            className="w-1/2 rounded shadow-inner shadow-slate-900 p-1 self-center"
+            placeholder="test Enchrome on me!"
+          />
         </div>
       </div>
     </>

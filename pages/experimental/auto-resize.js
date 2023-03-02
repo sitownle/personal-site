@@ -89,17 +89,17 @@ const AutoResize = () => {
             {"Toggle Down!"}
           </button>
         </div>
-        <p className="w-1/2 mx-auto pb-4 text-slate-300">
+        <p className="w-[90%] md:w-1/2 mx-auto pb-4 text-slate-300">
           So how does it work? Here's the code for the first demo (minus all the
           unnecessary styles). Simply replace "left" with "right", "top", or
           "bottom" to achieve the behavior of the other demos.
         </p>
-        <pre className="bg-black p-4 text-slate-200 text-sm w-1/2 mx-auto rounded-lg text-left whitespace-pre-wrap">
+        <pre className="bg-black p-4 text-slate-200 text-sm w-[90%] md:w-1/2 mx-auto rounded-lg text-left whitespace-pre-wrap">
           {
             'import {useState, useRef} from "react"; \nimport useAutoResize from "@sitownle/use-auto-resize";\n\nconst AutoResize = () => {\n  const [toggle, target] = useAutoResize({ direction: "left" });\n  <div\n    ref={target}\n    className="text-green-200"  \n  >\n    <p className="rotate-180">&#10132;</p>\n  </div>\n  <button\n   onClick={toggle}\n   className="text-green-900"\n  >\n   {"Toggle Left!"}\n  </button>\n}'
           }
         </pre>
-        <p className="w-1/2 mx-auto py-4 text-slate-300">
+        <p className="w-[90%] md:w-1/2 mx-auto py-4 text-slate-300">
           By returning the toggle function, useAutoResize gives you the freedom
           to delegate control of your targets resize animation to any element in
           your project without worrying about colocating state or drilling props

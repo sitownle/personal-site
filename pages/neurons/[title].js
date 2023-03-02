@@ -175,19 +175,21 @@ const Musing = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="min-h-[100vh] w-full bg-slate-900 text-slate-200 flex flex-row gap-4">
-        <div className="w-1/4 flex flex-col gap-4">
+      <div className="min-h-[100vh] w-full bg-slate-900 text-slate-200 flex flex-col-reverse items-center md:items-start md:flex-row gap-4">
+        <div className="md:w-1/4 w-[90%] flex flex-col gap-4 pt-10">
           <Link
             href="/"
-            className="group bg-slate-600 text-slate-100 hover:bg-slate-100 hover:text-slate-500 transition-colors w-[200px] text-center rounded-sm ml-4 mt-4 px-2 flex pl-16"
+            className="group bg-slate-600 text-slate-100 hover:bg-slate-100 hover:text-slate-600 transition-colors w-[100px] text-center rounded-sm pl-[18px] flex absolute top-0 left-0 shadow-md"
           >
-            <p className="rotate-180 w-[10px] text-slate-500 group-hover:translate-x-[-4px]">
+            <p className="rotate-180 w-[10px] text-slate-600 group-hover:translate-x-[-4px]">
               &#10132;
             </p>
             Home
           </Link>
           <div className="flex">
-            <span className="pl-4 w-[230px]">Explore Connected Neurons </span>
+            <span className="pl-4 w-[250px] text-lg">
+              Explore Connected Neurons{" "}
+            </span>
             <p className="rotate-90 w-[10px]">&#10132;</p>
           </div>
           {Object.entries(neurons).map((key, value) => {
@@ -195,7 +197,7 @@ const Musing = () => {
             return <Synapse neuron={key[0]} key={value} />;
           })}
         </div>
-        <div className="w-1/2 flex flex-col gap-6 mt-6 px-2">
+        <div className="w-[90%] md:w-2/3 flex flex-col gap-6 mt-6 px-2 mx-auto md:mx-0">
           <h1 className="text-3xl text-center">
             {title ? changeCase(title) : null}
           </h1>

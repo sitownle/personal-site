@@ -114,7 +114,7 @@ export default function Graph() {
   return (
     <>
       {link !== "" ? (
-        <div className="absolute bottom-0 left-0 py-[2px] px-[8px] text-xs bg-slate-900 text-slate-50">
+        <div className="absolute bottom-0 left-0 py-[2px] px-[8px] text-xs bg-slate-900 text-slate-50 rounded-tr">
           {`https://sitownle.com/neurons/${link}`}
         </div>
       ) : null}
