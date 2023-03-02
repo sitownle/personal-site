@@ -13,7 +13,7 @@ const Enchrome = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="min-h-[100vh] w-full bg-slate-900 text-slate-200 flex flex-row justify-center">
+      <div className="min-h-[100vh] w-full bg-gradient-to-b from-slate-900 to-black text-slate-200 flex flex-row justify-center">
         <Link
           className="absolute top-0 left-0 text-slate-900 bg-slate-500 p-2 rounded-br"
           href="/experimental"
@@ -48,6 +48,10 @@ const Enchrome = () => {
               here
             </Link>
           </div>
+          <p>
+            Now that you have Enchrome, you can test it on the password input
+            below.
+          </p>
           <input
             type="password"
             className="w-1/2 rounded shadow-inner shadow-slate-900 p-1 self-center"

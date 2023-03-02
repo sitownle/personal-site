@@ -89,10 +89,13 @@ const AutoResize = () => {
             {"Toggle Down!"}
           </button>
         </div>
+        <h2 className="w-[90%] md:w-1/2 mx-auto pb-4 text-slate-300 text-xl underline">
+          So how does it work?{" "}
+        </h2>
         <p className="w-[90%] md:w-1/2 mx-auto pb-4 text-slate-300">
-          So how does it work? Here's the code for the first demo (minus all the
-          unnecessary styles). Simply replace "left" with "right", "top", or
-          "bottom" to achieve the behavior of the other demos.
+          Here's the code for the first demo (minus all the unnecessary styles).
+          Simply replace "left" with "right", "top", or "bottom" to achieve the
+          behavior of the other demos.
         </p>
         <pre className="bg-black p-4 text-slate-200 text-sm w-[90%] md:w-1/2 mx-auto rounded-lg text-left whitespace-pre-wrap">
           {

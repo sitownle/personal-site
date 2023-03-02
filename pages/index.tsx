@@ -18,7 +18,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="flex flex-col justify-between items-center p-24 min-h-screen">
+      <main className="flex flex-col justify-between items-center py-24 px-12 min-h-screen bg-gradient-to-b from-slate-900 to-black">
         <div className="flex justify-center md:justify-between items-center text-sm max-w-[1100px] w-full z-2 font-mono">
           <div /*className="sm:flex sm:justify-center sm:fixed sm:w-full sm:items-end sm:pointer-events-none sm: sm:p-8 sm:h-[200px] sm:inset-x-0 sm:top-auto sm:bottom-0 sm:z-1 sm:bg-gradient-to-b sm:from-transparent sm:to-white sm:bg-repeat-y"*/
           >
@@ -59,19 +59,19 @@ export default function Home() {
           </a>
         </div>
 
-        <div className="md:h-[400px] md:w-[600px] h-[200px] w-[300px]">
+        <div className="md:h-[400px] md:w-[600px] h-[210px] w-[350px]">
           <Graph />
         </div>
 
         <div
           className={
-            /*"md:grid md:grid-cols-4 md:w-[120%] */ "md:flex-row md:w-[120%] flex flex-col items-center md:items-start w-[160%] max-w-[100vw]"
+            /*"md:grid md:grid-cols-4 md:w-[120%] */ "md:flex-row md:w-[100%] flex flex-col items-center md:items-start justify-center w-[100%] max-w-[100vw] self-center"
           }
         >
           <Link
             href="/neurons/Software-Development"
             className={
-              "group py-4 px-[1.2rem] rounded-xl bg-[rgb(180, 185, 188)] border border-black hover:border-slate-300/20 hover:bg-slate-700/20 max-h-[170px]"
+              "min-w-[190px] group py-4 px-[1.2rem] rounded-xl bg-[rgb(180, 185, 188)] border border-black hover:border-slate-300/20 hover:bg-slate-700/20"
             }
           >
             <h2 className="font-semibold mb-[0.7rem]">
@@ -80,7 +80,7 @@ export default function Home() {
                 &#10132;
               </span>
             </h2>
-            <p className="m-0 text-sm leading-6 opacity-60 md:max-w-[100px] max-w-30ch md:max-h-[100px] text-ellipsis overflow-hidden">
+            <p className="m-0 text-sm leading-6 opacity-60 max-w-[30ch]">
               My thoughts on transferable knowledge from my domains of interest:
               machine learning, software development, evolutionary biology, and
               more.
@@ -90,7 +90,7 @@ export default function Home() {
           <Link
             href="/islands/Volleyball"
             className={
-              "min-w-[190px] group py-4 px-[1.2rem] rounded-xl bg-[rgb(180, 185, 188)] border border-black hover:border-slate-300/20 hover:bg-slate-700/20" /*styles.card*/
+              "min-w-[190px] group py-4 px-[1.2rem] rounded-xl bg-[rgb(180, 185, 188)] border border-black hover:border-slate-300/20 hover:bg-slate-700/20"
             }
           >
             <h2 className="font-semibold mb-[0.7rem]">
