@@ -20,8 +20,7 @@ export default function Home() {
       </Head>
       <main className="flex flex-col justify-between items-center py-24 px-12 min-h-screen bg-gradient-to-b from-slate-900 to-black">
         <div className="flex justify-center md:justify-between items-center text-sm max-w-[1100px] w-full z-2 font-mono">
-          <div /*className="sm:flex sm:justify-center sm:fixed sm:w-full sm:items-end sm:pointer-events-none sm: sm:p-8 sm:h-[200px] sm:inset-x-0 sm:top-auto sm:bottom-0 sm:z-1 sm:bg-gradient-to-b sm:from-transparent sm:to-white sm:bg-repeat-y"*/
-          >
+          <div>
             <a
               href="https://github.com/sitownle/personal-site"
               target="_blank"
@@ -65,7 +64,7 @@ export default function Home() {
 
         <div
           className={
-            /*"md:grid md:grid-cols-4 md:w-[120%] */ "md:flex-row md:w-[100%] flex flex-col items-center md:items-start justify-center w-[100%] max-w-[100vw] self-center"
+            "md:flex-row md:w-[100%] flex flex-col items-center md:items-start justify-center w-[100%] max-w-[100vw] self-center"
           }
         >
           <Link

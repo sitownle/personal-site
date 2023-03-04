@@ -10,7 +10,7 @@ export default function useAutoResize(config) {
 
   if (targ.current) {
     targ.current.style.transition = "all 0.20s ease";
-    targ.current.style.whiteSpace = "nowrap";
+    //targ.current.style.whiteSpace = "nowrap";
     targ.current.willChange = "contents";
     targ.current.style.transformOrigin = dir;
   }

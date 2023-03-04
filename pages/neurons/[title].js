@@ -1,6 +1,8 @@
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useState } from "react";
+import useAutoResize from "../../components/useAutoResize.js";
 
 const neurons = {
   "Software-Development": (
@@ -147,6 +149,10 @@ const Musing = () => {
   const router = useRouter();
   const { title } = router.query;
   const content = neurons[title];
+  const [isOpen, setIsOpen] = useState(true);
+  const [toggle, target] = useAutoResize({
+    direction: "left"
+  });
 
   function changeCase(origStr) {
     return origStr.replace(/-/g, " ");
@@ -176,7 +182,31 @@ const Musing = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="min-h-[100vh] w-full bg-slate-900 text-slate-200 flex flex-col-reverse items-center md:items-start md:flex-row gap-4">
-        <div className="md:w-1/4 w-[90%] flex flex-col gap-4 pt-10">
+        {isOpen ? (
+          <div
+            className="rotate-[180deg] absolute top-0 left-1/4 border-l border-t border-slate-500/50 px-2 py-1 rounded-l cursor-pointer hover:bg-slate-500 hover:text-slate-900 transition-all shadow-[-3px_-1px_0px_0px_rgba(100,116,139,0.5)]"
+            onClick={() => {
+              toggle();
+              setIsOpen(false);
+            }}
+          >
+            &#10132;
+          </div>
+        ) : (
+          <div
+            className="absolute top-0 left-0 border-r border-b border-slate-500/50 px-2 py-1 rounded-l cursor-pointer hover:bg-slate-500 hover:text-slate-900 transition-all shadow-[3px_1px_0px_0px_rgba(100,116,139,0.5)]"
+            onClick={() => {
+              toggle();
+              setIsOpen(true);
+            }}
+          >
+            &#10132;
+          </div>
+        )}
+        <div
+          className="md:w-1/4 w-[90%] flex flex-col gap-4 pt-10"
+          ref={target}
+        >
           <Link
             href="/"
             className="group bg-slate-600 text-slate-100 hover:bg-slate-100 hover:text-slate-600 transition-colors w-[100px] text-center rounded-sm pl-[18px] flex absolute top-0 left-0 shadow-md"
