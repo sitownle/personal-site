@@ -106,7 +106,7 @@ const Island = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="min-h-[100vh] w-full bg-slate-900 text-slate-200 flex flex-col-reverse items-center md:items-start md:flex-row gap-4">
+      <div className="min-h-[100vh] w-full bg-gradient-to-b from-slate-900 to-black text-slate-200 flex flex-col-reverse items-center md:items-start md:flex-row gap-4">
         <div className="md:w-1/4 w-[90%] flex flex-col gap-4 pt-10">
           <Link
             href="/"

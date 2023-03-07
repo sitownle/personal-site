@@ -181,7 +181,7 @@ const Musing = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="min-h-[100vh] w-full bg-slate-900 text-slate-200 flex flex-col-reverse items-center md:items-start md:flex-row gap-4">
+      <div className="min-h-[100vh] w-full bg-gradient-to-b from-slate-900 to-black text-slate-200 flex flex-col-reverse items-center md:items-start md:flex-row gap-4">
         {isOpen ? (
           <div
             className="rotate-[180deg] absolute top-0 left-1/4 border-l border-t border-slate-500/50 px-2 py-1 rounded-l cursor-pointer hover:bg-slate-500 hover:text-slate-900 transition-all shadow-[-3px_-1px_0px_0px_rgba(100,116,139,0.5)]"
