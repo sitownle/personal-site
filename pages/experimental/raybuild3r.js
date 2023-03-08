@@ -1,8 +1,21 @@
 import Head from "next/head";
 import Link from "next/link";
+import { useState } from "react";
 import RB3Canvas from "../../components/raybuild3r-canvas";
 
 const Raybuild3r = () => {
+  const [model, setModel] = useState("Paraxial Lens");
+  function HeaderButton({ title }) {
+    return (
+      <button
+        className="text-slate-200 text-sm px-2 border border-slate-800 rounded-lg bg-gradient-to-l from-slate-800 to-black shadow-md"
+        onClick={() => setModel(title)}
+      >
+        {title}
+      </button>
+    );
+  }
+
   return (
     <>
       <Head>
@@ -21,8 +34,13 @@ const Raybuild3r = () => {
         >
           {"<< Projects Home"}
         </Link>
-        <div className="pt-12 md:w-1/2 w-[90%] flex flex-col gap-4">
-          <RB3Canvas />
+        <div className="mt-12 md:w-full w-[90%] h-full md:h-[75vh] rounded flex flex-col gap-4 border border-slate-500">
+          <div className="w-full flex flex-row bg-slate-500 h-[5vh] p-2 gap-2">
+            <HeaderButton title="Paraxial Lens" />
+            <HeaderButton title="Thick Lens" />
+            <HeaderButton title="Aperture Stop" />
+          </div>
+          <RB3Canvas model={model} />
         </div>
       </div>
     </>

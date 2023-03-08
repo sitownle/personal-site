@@ -118,7 +118,7 @@ export default function Graph() {
           {`https://sitownle.com/neurons/${link}`}
         </div>
       ) : null}
-      <Canvas camera={{ position: new /*THREE.*/ Vector3(0, 0, 12) }}>
+      <Canvas camera={{ position: new Vector3(0, 0, 12) }}>
         <ambientLight intensity={0.5} />
         <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
         <pointLight position={[-10, -10, -10]} />
