@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
+import Skeleton from "../../components/skeleton";
 import { useState } from "react";
 import RB3Canvas from "../../components/raybuild3r-canvas";
 
@@ -27,14 +28,18 @@ const Raybuild3r = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="min-h-[100vh] w-full bg-gradient-to-b from-slate-900 to-black text-slate-200 flex flex-row justify-center">
-        <Link
-          className="absolute top-0 left-0 text-slate-900 bg-slate-500 p-2 rounded-br"
-          href="/experimental"
-        >
-          {"<< Projects Home"}
-        </Link>
-        <div className="mt-12 md:w-full w-[90%] h-full md:h-[75vh] rounded flex flex-col gap-4 border border-slate-500">
+      {/* <div className="min-h-[100vh] w-full bg-gradient-to-b from-slate-900 to-black text-slate-200 flex flex-col items-center">
+        <Header /> */}
+      <Skeleton>
+        {/* <div className="min-h-[5vh] w-full bg-gradient-to-t from-slate-900 to-black text-slate-300 flex flex-row items-center gap-2">
+          <Link
+            href="/experimental"
+            className="p-2 hover:shadow-md border-b hover:border-slate-400/50 border-slate-900 rounded-lg transition-colors hover:bg-gradient-to-t hover:from-slate-400/50 hover:to-black"
+          >
+            {"<< Projects Home"}{" "}
+          </Link>
+        </div> */}
+        <div className="mt-6 md:w-full w-[90%] h-full md:h-[75vh] rounded flex flex-col gap-4 border border-slate-500">
           <div className="w-full flex flex-row bg-slate-500 h-[5vh] p-2 gap-2">
             <HeaderButton title="Paraxial Lens" />
             <HeaderButton title="Thick Lens" />
@@ -42,7 +47,8 @@ const Raybuild3r = () => {
           </div>
           <RB3Canvas model={model} />
         </div>
-      </div>
+      </Skeleton>
+      {/* </div> */}
     </>
   );
 };

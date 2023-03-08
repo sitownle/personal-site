@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Link from "next/link";
 
-const projects = ["rays.ai", "auto-resize", "enchrome"];
+const projects = ["rays.ai", "auto-resize", "enchrome", "raybuild3r"];
 const links = { "rays.ai": "https://rays.ai" };
 const descriptions = {
   "auto-resize":
@@ -9,7 +9,9 @@ const descriptions = {
   enchrome:
     "A password encryption chrome extension that provides an extra level of security for users at all levels of security consciousness",
   "rays.ai":
-    "My first job! I built, deployed, and managed all parts of the website, the most significant of which was the graphical editor for optical design exploration with collaborative editing, unlimited undo/redo and a microservice written in golang for powering ray tracing computations"
+    "My first job! I built, deployed, and managed all parts of the website, the most significant of which was the graphical editor for optical design exploration with collaborative editing, unlimited undo/redo and a microservice written in golang for powering ray tracing computations",
+  raybuild3r:
+    "a 3D continuation of my work at rays.ai as a favor to my boss and to take my Three.js skills to the moon"
 };
 
 const ProjectIndex = () => {
