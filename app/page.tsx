@@ -1,17 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
-import dynamic from "next/dynamic";
 import styles from "../styles/Home.module.css";
 import GraphWrapper from "./graph-wrapper.jsx";
-// const Graph = dynamic(() => import("./graph.jsx"), {
-//   loading: () => (
-//     <div className="animate-fill w-[200px] bg-gradient-to-l from-cyan-400 to-black border-r border-cyan-400 h-[50px] ml-[20%] mt-[30%] shadow-[11px_0px_6px_5px_cyan-400] shadow-cyan-400" />
-//   )
-// });
+// for when three/postprocessing is fixed without dynamic
+//import Graph from "./graph.jsx";
+//import { Suspense } from "react";
 
 export default function Home() {
   return (
-    <main className="flex flex-col justify-between items-center py-24 px-12 min-h-screen bg-gradient-to-b from-slate-900 to-black">
+    <main className="flex flex-col justify-between items-center py-24 px-12 min-h-[95vh] bg-gradient-to-b from-slate-900 to-black">
       <div className="flex justify-center md:justify-between items-center text-sm max-w-[1100px] w-full z-2 font-mono">
         <div>
           <a
@@ -28,13 +25,14 @@ export default function Home() {
           href="https://nextjs.org/"
         >
           Powered by&nbsp;
-          <Image
-            className={"relative invert drop-shadow-md"}
-            src="/next.svg"
-            alt="Next.js Logo"
-            width={60}
-            height={37}
-          />
+          <div className="relative h-auto w-[65px] h-[14px]">
+            <Image
+              className="relative invert drop-shadow-md"
+              src="/next.svg"
+              alt="Next.js Logo"
+              fill={true}
+            />
+          </div>
           <div
             className={
               styles.thirteen //"relative flex justify-center items-center w-[30px] h-[30px] p-[8px] ml-[10px] overflow-hidden shadow-md shadow-[#0000001a] rounded-xl before:absolute before:z-[-1] after-absolute after:z-[-1] before:w-[200%] before:h-[200%] before:animate-[spin_6s_infinite] before:bg-gradient-to-r before: from-[#00000010] before:to-[#00000010] before:via-[#00000080] after:bg-gradient-to-br after:from-[rgb(239, 245, 249)] after:to-[rgb(228, 232, 233)]" /*"sm:flex sm:justify-center sm:fixed sm:w-full"*/
@@ -52,7 +50,13 @@ export default function Home() {
       </div>
 
       <div className="md:h-[400px] md:w-[600px] h-[210px] w-[350px]">
+        {/* <Suspense
+          fallback={
+            <div className="animate-fill w-[200px] bg-gradient-to-l from-cyan-400 to-black border-r border-cyan-400 h-[50px] ml-[20%] mt-[30%] shadow-[11px_0px_6px_5px_cyan-400] shadow-cyan-400" />
+          }
+        > */}
         <GraphWrapper />
+        {/* </Suspense> */}
       </div>
 
       <div

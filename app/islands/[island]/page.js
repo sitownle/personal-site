@@ -1,6 +1,4 @@
-"use client";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 
 const islands = {
   Volleyball: (
@@ -67,16 +65,8 @@ const islands = {
   )
 };
 
-const bridges = [
-  "Volleyball",
-  "Pickleball",
-  "Game-Development",
-  "Strength-Training",
-  "Nutrition"
-];
-
-export default function Island() {
-  const title = usePathname().substring(9);
+export default function Island(context) {
+  const title = context.params.island;
   const content = islands[title];
 
   function changeCase(origStr) {
@@ -99,7 +89,7 @@ export default function Island() {
 
   return (
     <>
-      <div className="min-h-[100vh] w-full flex flex-col-reverse items-center md:items-start md:flex-row gap-4">
+      <div className="min-h-[95vh] w-full flex flex-col-reverse items-center md:items-start md:flex-row gap-4">
         <div className="md:w-1/4 w-[90%] flex flex-col gap-4 pt-10">
           <div className="flex">
             <span className="pl-4 text-lg w-[270px]">
