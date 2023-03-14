@@ -1,10 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import styles from "../styles/Home.module.css";
-//import GraphWrapper from "./graph-wrapper.jsx";
+import GraphWrapper from "./graph-wrapper.jsx";
 // for when three/postprocessing is fixed without dynamic
-import Graph from "./graph.jsx";
-import { Suspense } from "react";
+//import Graph from "./graph.jsx";
+//import { Suspense } from "react";
 
 export default function Home() {
   return (
@@ -50,13 +50,14 @@ export default function Home() {
       </div>
 
       <div className="md:h-[400px] md:w-[600px] h-[210px] w-[350px]">
-        <Suspense
+        {/* <Suspense
           fallback={
             <div className="animate-fill w-[200px] bg-gradient-to-l from-cyan-400 to-black border-r border-cyan-400 h-[50px] ml-[20%] mt-[30%] shadow-[11px_0px_6px_5px_cyan-400] shadow-cyan-400" />
           }
         >
           <Graph />
-        </Suspense>
+        </Suspense> */}
+        <GraphWrapper />
       </div>
 
       <div
