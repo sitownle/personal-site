@@ -5,7 +5,7 @@ import { useRef, useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Text } from "@react-three/drei";
-import { EffectComposer, Bloom } from "@react-three/postprocessing";
+//import { EffectComposer, Bloom } from "@react-three/postprocessing";
 
 function Node(props) {
   // This reference will give us direct access to the THREE.Mesh object
@@ -104,7 +104,9 @@ function Connection(props) {
 
 export default function Graph() {
   const router = useRouter();
-  const [text, setText] = useState("Welcome!");
+  const [text, setText] = useState(
+    "Please fix @react-three/postprocessing in app router!"
+  );
   const [link, setLink] = useState("");
   const nodeXs = [-10, -5, 0, 5, 10];
 
@@ -216,9 +218,9 @@ export default function Graph() {
           {text}
           <meshStandardMaterial color="#aaa" toneMapped={false} />
         </Text>
-        <EffectComposer>
+        {/* <EffectComposer>
           <Bloom mipmapBlur luminanceThreshold={1} radius={0.4} />
-        </EffectComposer>
+        </EffectComposer> */}
       </Canvas>
     </>
   );
