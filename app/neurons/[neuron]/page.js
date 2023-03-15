@@ -52,7 +52,7 @@ const neurons = {
       <p className="leading-[1.6em] text-[18px]"></p>
     </>
   ),
-  "Probability-&-Statistics": (
+  "Probability-and-Statistics": (
     <>
       <p className="leading-[1.6em] text-[18px]">
         As the most abstract of all topics covered on this site, Probability and
@@ -110,7 +110,7 @@ const synapses = {
   "Software-Development": {
     "Machine-Learning": "Coding, Policy Evolution, Gradient Clipping",
     "Evolutionary-Biology": "Biodiversity",
-    "Probability-&-Statistics": "Law of Large Numbers, Antifragility",
+    "Probability-and-Statistics": "Law of Large Numbers, Antifragility",
     Government:
       "Collaborative Policy Evolution (good coding practices), Microservices"
   },
@@ -118,7 +118,7 @@ const synapses = {
     "Software-Development": "Coding, Policy Evolution, Gradient Clipping",
     "Evolutionary-Biology":
       "Policy Evolution, Multi-Agent Systems, Convergent/Divergent Evolution",
-    "Probability-&-Statistics":
+    "Probability-and-Statistics":
       "Antifragility, Mathematical Optimization, Unsupervised Learning",
     Government: "Gradient Clipping"
   },
@@ -126,10 +126,10 @@ const synapses = {
     "Software-Development": "Biodiversity",
     "Machine-Learning":
       "Policy Evolution, Multi-Agent Systems, Convergent/Divergent Evolution",
-    "Probability-&-Statistics": "Antifragility",
+    "Probability-and-Statistics": "Antifragility",
     Government: "Macroevolution"
   },
-  "Probability-&-Statistics": {
+  "Probability-and-Statistics": {
     "Software-Development": "Law of Large Numbers, Antifragility",
     "Machine-Learning":
       "Antifragility, Mathematical Optimization, Unsupervised Learning",
@@ -141,7 +141,7 @@ const synapses = {
       "Collaborative Policy Evolution (good coding practices), Microservices",
     "Machine-Learning": "Gradient Clipping",
     "Evolutionary-Biology": "Macroevolution",
-    "Probability-&-Statistics": "Antifragility"
+    "Probability-and-Statistics": "Antifragility"
   }
 };
 
@@ -161,12 +161,13 @@ export default function Neuron(context) {
     return title ? (
       <Link
         href={`/neurons/${neuron}`}
-        className="group h-[20vh] p-4 flex flex-col gap-4 rounded text-slate-400 hover:text-slate-200 hover:bg-slate-700 cursor-pointer transition-all border border-slate-900 hover:border-slate-500"
+        className="group h-[20vh] p-4 flex flex-col gap-4 rounded text-slate-400 hover:text-slate-200 hover:bg-slate-700/50 cursor-pointer transition-all border border-slate-900 hover:border-slate-500"
       >
         <div className="flex gap-[4px]">
           <p>{changeCase(neuron)}</p>
           <p className="group-hover:translate-x-[4px]">&#10132;</p>
         </div>
+        {console.log(title, neuron)}
         <p>Connecting Concepts: {synapses[title][neuron]}</p>
       </Link>
     ) : null;
@@ -174,10 +175,10 @@ export default function Neuron(context) {
 
   return (
     <>
-      <div className="min-h-[95vh] w-full flex flex-col-reverse items-center md:items-start md:flex-row gap-4">
+      <div className="min-h-[95vh] w-full md:flex items-center md:items-start md:flex-row gap-4">
         {isOpen ? (
           <div
-            className="rotate-[180deg] absolute top-0 left-1/4 border-l border-t border-slate-500/50 px-2 py-1 rounded-l cursor-pointer hover:bg-slate-500 hover:text-slate-900 transition-all shadow-[-3px_-1px_0px_0px_rgba(100,116,139,0.5)]"
+            className="md:hidden z-[100] rotate-[180deg] absolute top-[4.7vh] right-0 md:right-3/4 border-slate-500/50 hover:border-t px-2 py-1 rounded cursor-pointer hover:bg-gradient-to-b hover:from-slate-400/50 hover:to-slate-900/50 bg-gradient-to-t from-slate-900 to-slate-800 transition-all " //shadow-[-3px_-1px_0px_0px_rgba(100,116,139,0.5)]"
             onClick={() => {
               toggle();
               setIsOpen(false);
@@ -187,7 +188,7 @@ export default function Neuron(context) {
           </div>
         ) : (
           <div
-            className="absolute top-0 left-0 border-r border-b border-slate-500/50 px-2 py-1 rounded-l cursor-pointer hover:bg-slate-500 hover:text-slate-900 transition-all shadow-[3px_1px_0px_0px_rgba(100,116,139,0.5)]"
+            className="z-[100] absolute top-[4.7vh] left-0 hover:border-b border-slate-500/50 px-2 py-1 rounded-r cursor-pointer hover:bg-gradient-to-t hover:from-slate-400/50 hover:to-slate-900/50 bg-gradient-to-b from-slate-900 to-slate-800 transition-all " //shadow-[3px_1px_0px_0px_rgba(100,116,139,0.5)]"
             onClick={() => {
               toggle();
               setIsOpen(true);
@@ -197,11 +198,11 @@ export default function Neuron(context) {
           </div>
         )}
         <div
-          className="md:w-1/4 w-[90%] flex flex-col gap-4 pt-10"
+          className="h-[95vh] md:w-1/4 w-[90%] mx-[5%] md:mx-0 absolute md:static top-0 md:flex md:flex-col gap-4 mt-10 bg-gradient-to-t from-black to-slate-900"
           ref={target}
         >
           <div className="flex">
-            <span className="pl-4 w-[250px] text-lg">
+            <span className="pl-4 pb-2 w-[250px] text-lg">
               Explore Connected Neurons{" "}
             </span>
             <p className="rotate-90 w-[10px]">&#10132;</p>
