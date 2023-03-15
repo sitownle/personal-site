@@ -5,7 +5,7 @@ import { useRef, useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Text } from "@react-three/drei";
-import { EffectComposer, Bloom } from "@react-three/postprocessing";
+//import { EffectComposer, Bloom } from "@react-three/postprocessing";
 
 const models = {
   "Paraxial Lens": null,
@@ -24,9 +24,9 @@ export default function RB3Canvas({ model }) {
         <meshStandardMaterial color="#aaa" toneMapped={false} />
       </Text>
       {models[model]}
-      <EffectComposer>
+      {/* <EffectComposer>
         <Bloom mipmapBlur luminanceThreshold={1} radius={0.4} />
-      </EffectComposer>
+      </EffectComposer> */}
     </Canvas>
   );
 }

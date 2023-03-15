@@ -105,7 +105,7 @@ function Connection(props) {
 export default function Graph() {
   const router = useRouter();
   const [text, setText] = useState(
-    "Please fix @react-three/postprocessing in app router!"
+    "ugly until @react-three/postprocessing fixed in app router!"
   );
   const [link, setLink] = useState("");
   const nodeXs = [-10, -5, 0, 5, 10];
@@ -117,7 +117,7 @@ export default function Graph() {
   return (
     <>
       {link !== "" ? (
-        <div className="absolute bottom-0 left-0 py-[2px] px-[8px] text-xs bg-slate-900 text-slate-50 rounded-tr">
+        <div className="hidden md:inline absolute bottom-0 left-0 py-[2px] px-[8px] text-xs bg-slate-900 text-slate-50 rounded-tr">
           {`https://sitownle.com/neurons/${link}`}
         </div>
       ) : null}
