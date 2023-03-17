@@ -1,8 +1,5 @@
-"use client";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useState } from "react";
-import useAutoResize from "../../experimental/auto-resize/useAutoResize.js";
+import NeuronSidebar from "./sidebar.js";
 
 const neurons = {
   "Software-Development": (
@@ -148,10 +145,10 @@ const synapses = {
 export default function Neuron(context) {
   const title = context.params.neuron;
   const content = neurons[title];
-  const [isOpen, setIsOpen] = useState(true);
-  const [toggle, target] = useAutoResize({
-    direction: "left"
-  });
+  // const [isOpen, setIsOpen] = useState(true);
+  // const [toggle, target] = useAutoResize({
+  //   direction: "left"
+  // });
 
   function changeCase(origStr) {
     return origStr.replace(/-/g, " ");
@@ -161,22 +158,38 @@ export default function Neuron(context) {
     return title ? (
       <Link
         href={`/neurons/${neuron}`}
-        className="group h-[20vh] p-4 flex flex-col gap-4 rounded text-slate-400 hover:text-slate-200 hover:bg-slate-700/50 cursor-pointer transition-all border border-slate-900 hover:border-slate-500"
+        className="group h-[20vh] p-4 flex flex-col gap-4 rounded text-slate-400 hover:text-slate-200 hover:bg-slate-700/50 cursor-pointer transition-all border border-slate-300/10 hover:border-slate-500"
       >
         <div className="flex gap-[4px]">
           <p>{changeCase(neuron)}</p>
           <p className="group-hover:translate-x-[4px]">&#10132;</p>
         </div>
-        {console.log(title, neuron)}
         <p>Connecting Concepts: {synapses[title][neuron]}</p>
       </Link>
     ) : null;
   }
 
+  function getSynapses() {
+    return (
+      <>
+        <div className="flex">
+          <span className="pl-4 pb-2 w-[250px] text-lg">
+            Explore Connected Neurons{" "}
+          </span>
+          <p className="rotate-90 w-[10px]">&#10132;</p>
+        </div>
+        {Object.entries(neurons).map((key, value) => {
+          if (key[0] == title) return null;
+          return <Synapse neuron={key[0]} key={value} />;
+        })}
+      </>
+    );
+  }
+
   return (
     <>
       <div className="min-h-[95vh] w-full md:flex items-center md:items-start md:flex-row gap-4">
-        {isOpen ? (
+        {/*isOpen ? (
           <div
             className="md:hidden z-[100] rotate-[180deg] absolute top-[4.7vh] right-0 md:right-3/4 border-slate-500/50 hover:border-t px-2 py-1 rounded cursor-pointer hover:bg-gradient-to-b hover:from-slate-400/50 hover:to-slate-900/50 bg-gradient-to-t from-slate-900 to-slate-800 transition-all " //shadow-[-3px_-1px_0px_0px_rgba(100,116,139,0.5)]"
             onClick={() => {
@@ -211,7 +224,8 @@ export default function Neuron(context) {
             if (key[0] == title) return null;
             return <Synapse neuron={key[0]} key={value} />;
           })}
-        </div>
+        </div> */}
+        <NeuronSidebar children={getSynapses()} />
         <div className="w-[90%] md:w-2/3 flex flex-col gap-6 mt-6 px-2 mx-auto md:mx-0">
           <h1 className="text-3xl text-center">
             {title ? changeCase(title) : null}

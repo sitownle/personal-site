@@ -1,4 +1,5 @@
 import Link from "next/link";
+import NeuronSidebar from "../../neurons/[neuron]/sidebar.js";
 
 const islands = {
   Volleyball: (
@@ -87,21 +88,27 @@ export default function Island(context) {
     ) : null;
   }
 
+  function getBridges() {
+    return (
+      <>
+        <div className="flex">
+          <span className="pl-4 text-lg w-[270px]">
+            Explore Thought Islands{" "}
+          </span>
+          <p className="rotate-90 w-[10px]">&#10132;</p>
+        </div>
+        {Object.entries(islands).map((key, value) => {
+          if (key[0] == title) return null;
+          return <Bridge island={key[0]} key={value} />;
+        })}
+      </>
+    );
+  }
+
   return (
     <>
-      <div className="min-h-[95vh] w-full flex flex-col-reverse items-center md:items-start md:flex-row gap-4">
-        <div className="md:w-1/4 w-[90%] flex flex-col gap-4 pt-10">
-          <div className="flex">
-            <span className="pl-4 text-lg w-[270px]">
-              Explore Thought Islands{" "}
-            </span>
-            <p className="rotate-90 w-[10px]">&#10132;</p>
-          </div>
-          {Object.entries(islands).map((key, value) => {
-            if (key[0] == title) return null;
-            return <Bridge island={key[0]} key={value} />;
-          })}
-        </div>
+      <div className="min-h-[95vh] w-full md:flex items-center md:items-start md:flex-row gap-4">
+        <NeuronSidebar children={getBridges()} />
         <div className="w-[90%] md:w-2/3 flex flex-col gap-6 mt-6 px-2 mx-auto md:mx-0">
           <h1 className="text-3xl text-center">
             {title ? changeCase(title) : null}
