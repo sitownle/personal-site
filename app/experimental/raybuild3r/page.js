@@ -4,6 +4,8 @@ import RB3Canvas from "./raybuild3r-canvas";
 
 const Raybuild3r = () => {
   const [model, setModel] = useState("Paraxial Lens");
+  const [showInstanceDetails, setShowInstanceDetails] = useState(false);
+
   function HeaderButton({ title }) {
     return (
       <button
@@ -31,7 +33,17 @@ const Raybuild3r = () => {
           <HeaderButton title="Thick Lens" />
           <HeaderButton title="Aperture Stop" />
         </div>
-        <RB3Canvas model={model} />
+        <RB3Canvas
+          model={model}
+          setShowInstanceDetails={setShowInstanceDetails}
+        />
+        {showInstanceDetails && (
+          <div
+            className="absolute top-[15vh] left-0 z-1 bg-slate-700 w-[200px] text-center rounded" /*style={{ position: "absolute", top: 0, left: 0, zIndex: 1 }}*/
+          >
+            <h1>Instance Details</h1>
+          </div>
+        )}
       </div>
     </>
   );

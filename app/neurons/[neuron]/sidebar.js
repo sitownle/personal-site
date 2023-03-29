@@ -32,7 +32,7 @@ export default function NeuronSidebar({ children }) {
         </div>
       )}
       <div
-        className="h-[95vh] md:h-auto md:w-1/4 w-[90%] mx-[5%] md:mx-0 absolute md:static top-0 md:flex md:flex-col gap-4 mt-10 bg-gradient-to-t from-black to-slate-900 rounded-xl shadow-md shadow-slate-300/20"
+        className="h-auto md:h-auto md:w-1/4 w-[90%] mx-[5%] md:mx-0 absolute md:static top-0 flex flex-col md:flex md:flex-col gap-4 mt-10 bg-gradient-to-t from-black to-slate-900 rounded-xl shadow-md shadow-slate-300/20"
         ref={target}
       >
         {children}
