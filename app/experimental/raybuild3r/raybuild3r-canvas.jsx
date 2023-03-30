@@ -38,14 +38,16 @@ export default function RB3Canvas({ model, setShowInstanceDetails }) {
     ),
     "Thick Lens": (
       <ThickLens
-        R1={5}
-        R2={3}
-        CT={2}
+        diameter={4}
+        R1={2}
+        R2={2}
+        CT={4}
         material={{}}
         position={position}
         setPosition={setPosition}
         rotation={[0, 0, 0]}
         setOrbitControlsEnabled={setOrbitControlsEnabled}
+        setShowInstanceDetails={setShowInstanceDetails}
       />
     ),
     "Aperture Stop": (
@@ -55,6 +57,7 @@ export default function RB3Canvas({ model, setShowInstanceDetails }) {
         setPosition={setPosition}
         rotation={[0, 0, 0]}
         setOrbitControlsEnabled={setOrbitControlsEnabled}
+        setShowInstanceDetails={setShowInstanceDetails}
       />
     )
   };

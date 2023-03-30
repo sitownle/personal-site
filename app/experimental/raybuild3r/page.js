@@ -38,10 +38,30 @@ const Raybuild3r = () => {
           setShowInstanceDetails={setShowInstanceDetails}
         />
         {showInstanceDetails && (
-          <div
-            className="absolute top-[15vh] left-0 z-1 bg-slate-700 w-[200px] text-center rounded" /*style={{ position: "absolute", top: 0, left: 0, zIndex: 1 }}*/
-          >
-            <h1>Instance Details</h1>
+          <div className="absolute top-[14vh] left-[1vh] z-1 bg-slate-700 w-[200px] border-b border-slate-400/50 rounded text-sm flex flex-col">
+            <div className="flex flex-row justify-between p-2 border border-slate-400/50 rounded-t">
+              <h1>Instance Details</h1>
+              <button onClick={() => setShowInstanceDetails(false)}>X</button>
+            </div>
+            <div className="flex flex-row p-2 border-x border-slate-400/50 items-center">
+              <h1 className="text-slate-400 pr-4 w-[60px]">Type</h1>
+              <input
+                className="bg-slate-600 rounded border border-slate-500/30 p-1 w-[100px]"
+                defaultValue={model}
+              />
+            </div>
+            <div className="flex flex-row p-2 pb-4 border-x border-slate-400/50 items-center">
+              <h1 className="text-slate-400 pr-4 w-[60px]">Parent</h1>
+              <div className="bg-slate-600 rounded border border-slate-500/30 p-1">
+                {"None"}
+              </div>
+            </div>
+            <h1 className="text-slate-400 pl-2 pb-1 border-x border-slate-400/50">
+              Description
+            </h1>
+            <div className="border-x border-slate-400/50 px-2">
+              <textarea className="bg-slate-600 rounded border border-slate-500/30 w-full p-2 text-slate-200/75 text-xs" />
+            </div>
           </div>
         )}
       </div>

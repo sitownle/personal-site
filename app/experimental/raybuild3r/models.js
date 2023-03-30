@@ -65,13 +65,11 @@ export function ParaxialLens({
     >
       <mesh position={[0, -8.57, 0]}>
         {/*[0,1,6,0]*/}
-        <sphereBufferGeometry
-          args={[/*-*/ 10, 64, 64, 0, Math.PI * 2, 0, 0.5]}
-        />
+        <sphereGeometry args={[/*-*/ 10, 64, 64, 0, Math.PI * 2, 0, 0.5]} />
         {<meshStandardMaterial color={"#b9d9eb"} />}
       </mesh>
       <mesh position={[0, 9 /*CT-R2T*/, 0]} rotation={[Math.PI, 0, 0]}>
-        <sphereBufferGeometry args={[10, 64, 64, 0, Math.PI * 2, 0, 0.5]} />
+        <sphereGeometry args={[10, 64, 64, 0, Math.PI * 2, 0, 0.5]} />
         {<meshStandardMaterial color={"#b9d9eb"} />}
       </mesh>
     </Shape>
@@ -83,7 +81,8 @@ export function ApertureStop({
   position,
   setPosition,
   rotation,
-  setOrbitControlsEnabled
+  setOrbitControlsEnabled,
+  setShowInstanceDetails
 }) {
   const stop = useRef();
 
@@ -112,21 +111,31 @@ export function ThickLens({
   position,
   setPosition,
   rotation,
-  setOrbitControlsEnabled
+  setOrbitControlsEnabled,
+  setShowInstanceDetails
 }) {
-  diameter = 1.7;
+  // diameter = 4;
 
-  R1 = 2; // Default outer radius of the lens
-  R2 = 5; // Default inner radius of the lens
-  CT = 1; // Default Center Thickness of the lens
+  // R1 = 4; // Default first radius of the lens
+  // R2 = 4; // Default second radius of the lens
+  // CT = 8; // Default Center Thickness of the lens
   const segments = 64; // Default number of segments used to generate the lens
   material = {}; // Additional properties for the lens material
 
-  //generate R1 partial sphere
+  const diameterR = diameter / 2;
 
-  //generate cylinder center
+  //vals for first surface
+  const thetaLength = Math.asin(diameterR / R1);
+  const x1 = diameterR / Math.tan(thetaLength);
+  const diff1 = R1 - x1;
 
-  //generate R2 partial Sphere
+  //vals for second surface
+  const thetaLength2 = Math.asin(diameterR / R2);
+  const x2 = diameterR / Math.tan(thetaLength2);
+  const diff2 = R2 - x2;
+
+  //vals for cylinder
+  const h = CT - diff1 - diff2; //R1 - R2;
 
   return (
     <>
@@ -140,22 +149,25 @@ export function ThickLens({
           rotation[2] + Math.PI / 2
         ]}
         setOrbitControlsEnabled={setOrbitControlsEnabled}
+        setShowInstanceDetails={setShowInstanceDetails}
       >
-        <mesh position={[0, 0, 0]}>
+        <mesh position={[0, -R1, 0]}>
           {/*[0,1,6,0]*/}
-          <sphereBufferGeometry
-            args={[/*-*/ R1, 64, 64, 0, Math.PI * 2, 0, 1]}
+          <sphereGeometry
+            args={[/*-*/ R1, 64, 64, 0, Math.PI * 2, 0, thetaLength]}
           />
           {<meshStandardMaterial color={"#b9d9eb"} />}
         </mesh>
-        <mesh position={[0, 0.6, 0]}>
-          <cylinderBufferGeometry
-            args={[diameter, diameter, CT /*-(R1T+R2T)*/, 64, 16, true]}
+        <mesh position={[0, -diff1 - h / 2, 0]}>
+          <cylinderGeometry
+            args={[diameterR, diameterR, h /*CT*/, 64, 16, true]}
           />
           {<meshStandardMaterial color={"#b9d9eb"} />}
         </mesh>
-        <mesh position={[0, 1.2 /*CT-R2T*/, 0]} rotation={[Math.PI, 0, 0]}>
-          <sphereBufferGeometry args={[R1, 64, 64, 0, Math.PI * 2, 0, 1]} />
+        <mesh position={[0, -diff1 - h + x2, 0]} rotation={[Math.PI, 0, 0]}>
+          <sphereGeometry
+            args={[R2, 64, 64, 0, Math.PI * 2, 0, thetaLength2]}
+          />
           {<meshStandardMaterial color={"#b9d9eb"} />}
         </mesh>
       </Shape>
