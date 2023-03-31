@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
-import * as THREE from "three";
+//import { Canvas, useFrame } from "@react-three/fiber";
+import { DoubleSide } from "three";
 import { useDrag } from "@use-gesture/react";
 //import { EffectComposer, Bloom } from "@react-three/postprocessing";
 
@@ -94,6 +94,7 @@ export function ApertureStop({
         setPosition={setPosition}
         rotation={[rotation[0], rotation[1] + Math.PI / 2, rotation[2]]}
         setOrbitControlsEnabled={setOrbitControlsEnabled}
+        setShowInstanceDetails={setShowInstanceDetails}
       >
         <torusGeometry args={[0.5, 0.1, 32, 32]} />
         <meshStandardMaterial color={"gray"} />
@@ -114,14 +115,13 @@ export function ThickLens({
   setOrbitControlsEnabled,
   setShowInstanceDetails
 }) {
-  // diameter = 4;
-
-  // R1 = 4; // Default first radius of the lens
-  // R2 = 4; // Default second radius of the lens
-  // CT = 8; // Default Center Thickness of the lens
   const segments = 64; // Default number of segments used to generate the lens
-  material = {}; // Additional properties for the lens material
+  const is1Concave = R1 < 0;
+  const is2Concave = R2 < 0;
+  if (is1Concave) R1 = -R1;
+  if (is2Concave) R2 = -R2;
 
+  //TODO FIX ALIGNMENT OF R1 TO 0 !!!
   const diameterR = diameter / 2;
 
   //vals for first surface
@@ -135,7 +135,10 @@ export function ThickLens({
   const diff2 = R2 - x2;
 
   //vals for cylinder
-  const h = CT - diff1 - diff2; //R1 - R2;
+  let h = CT - diff1 - diff2;
+  //below may offset from 0
+  if (is1Concave) h += 2 * diff1;
+  if (is2Concave) h += 2 * diff2;
 
   return (
     <>
@@ -151,24 +154,31 @@ export function ThickLens({
         setOrbitControlsEnabled={setOrbitControlsEnabled}
         setShowInstanceDetails={setShowInstanceDetails}
       >
-        <mesh position={[0, -R1, 0]}>
-          {/*[0,1,6,0]*/}
+        <mesh
+          position={is1Concave ? [0, R1 - 2 * diff1, 0] : [0, -R1, 0]}
+          rotation={is1Concave ? [Math.PI, 0, 0] : [0, 0, 0]}
+        >
           <sphereGeometry
-            args={[/*-*/ R1, 64, 64, 0, Math.PI * 2, 0, thetaLength]}
+            args={[R1, segments, segments, 0, Math.PI * 2, 0, thetaLength]}
           />
-          {<meshStandardMaterial color={"#b9d9eb"} />}
+          {<meshStandardMaterial color={"#b9d9eb"} side={DoubleSide} />}
         </mesh>
         <mesh position={[0, -diff1 - h / 2, 0]}>
           <cylinderGeometry
-            args={[diameterR, diameterR, h /*CT*/, 64, 16, true]}
+            args={[diameterR, diameterR, h, segments, 16, true]}
           />
           {<meshStandardMaterial color={"#b9d9eb"} />}
         </mesh>
-        <mesh position={[0, -diff1 - h + x2, 0]} rotation={[Math.PI, 0, 0]}>
+        <mesh
+          position={
+            is2Concave ? [0, -diff1 - h - x2, 0] : [0, -diff1 - h + x2, 0]
+          }
+          rotation={is2Concave ? [0, 0, 0] : [Math.PI, 0, 0]}
+        >
           <sphereGeometry
-            args={[R2, 64, 64, 0, Math.PI * 2, 0, thetaLength2]}
+            args={[R2, segments, segments, 0, Math.PI * 2, 0, thetaLength2]}
           />
-          {<meshStandardMaterial color={"#b9d9eb"} />}
+          {<meshStandardMaterial color={"#b9d9eb"} side={DoubleSide} />}
         </mesh>
       </Shape>
       {/* <EffectComposer>

@@ -2,13 +2,10 @@
 
 import { Vector3, QuadraticBezierCurve3 } from "three";
 import { useRef, useState, useEffect } from "react";
-import { useRouter } from "next/router";
-import { Canvas, useFrame, useThree, extend } from "@react-three/fiber";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Text, OrbitControls } from "@react-three/drei";
 //import { EffectComposer, Bloom } from "@react-three/postprocessing";
 import { ParaxialLens, ThickLens, ApertureStop } from "./models.js";
-// import { orbitControls } from "three-stdlib";
-//extend({ orbitControls });
 
 function OrbitController({ enabled }) {
   const { camera, gl } = useThree();
@@ -39,8 +36,8 @@ export default function RB3Canvas({ model, setShowInstanceDetails }) {
     "Thick Lens": (
       <ThickLens
         diameter={4}
-        R1={2}
-        R2={2}
+        R1={4}
+        R2={4}
         CT={4}
         material={{}}
         position={position}
@@ -73,6 +70,12 @@ export default function RB3Canvas({ model, setShowInstanceDetails }) {
           <meshStandardMaterial color="#aaa" toneMapped={false} />
         </Text>
         {models[model]}
+        <mesh position={[0, 3, 0]}>
+          <sphereGeometry
+            args={[0.5, 32, 32, 0, Math.PI * 2, 0, Math.PI * 2]}
+          />
+          <meshStandardMaterial color="#00FF00" toneMapped={false} />
+        </mesh>
         <OrbitController enabled={orbitControlsEnabled} />
         {/* <EffectComposer>
         <Bloom mipmapBlur luminanceThreshold={1} radius={0.4} />
