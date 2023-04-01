@@ -3,12 +3,12 @@ import { useState } from "react";
 import RB3Canvas from "./raybuild3r-canvas";
 
 const parameters = {
-  "Paraxial Lens": { Diameter: 4, Power: 0 },
+  "Paraxial Lens": { Diameter: 6, Power: 0 },
   "Aperture Stop": { Diameter: 4 },
   "Thick Lens": {
-    Diameter: 4,
-    R1: 2,
-    R2: 2,
+    Diameter: 6,
+    R1: 4,
+    R2: 4,
     CT: 4,
     Sag1: 0,
     Sag2: 0,
@@ -19,6 +19,7 @@ const parameters = {
 const Raybuild3r = () => {
   const [model, setModel] = useState("Paraxial Lens");
   const [showInstanceDetails, setShowInstanceDetails] = useState(false);
+  const [params, setParams] = useState(parameters);
 
   function HeaderButton({ title }) {
     return (
@@ -35,7 +36,11 @@ const Raybuild3r = () => {
     function ParameterLine({ param, val }) {
       function submit(e) {
         console.log("submitted!");
-        if (e) e.target.blur();
+        setParams({
+          ...params,
+          [model]: { ...params[model], [param]: e.target.value }
+        });
+        //if (e) e.target.blur();
       }
       return (
         <div className="flex flex-row p-2 border-x border-slate-400/50 items-center">
@@ -43,16 +48,17 @@ const Raybuild3r = () => {
           <input
             className="peer bg-slate-600 rounded border border-slate-500/30 p-1 w-[100px]"
             defaultValue={val}
+            onBlur={e => submit(e)}
             onKeyDown={e => {
               if (e.key === "Enter") submit(e);
             }}
           />
-          <button
+          {/* <button
             className="ml-1 transition-colors text-slate-700 bg-slate-700 border-slate-700 peer-focus:text-slate-200 text-sm px-1 border peer-focus:border-slate-800 rounded peer-focus:bg-gradient-to-l from-slate-800 to-black peer-focus:shadow-md peer-focus:hover:bg-gradient-to-r hover:from-slate-800 hover:to-black"
             onClick={() => submit()}
           >
             &#x2713;
-          </button>
+          </button> */}
         </div>
       );
     }
@@ -106,12 +112,12 @@ const Raybuild3r = () => {
             defaultValue={"0"}
           />
         </div>
-        {Object.entries(parameters[model]).map(([key, value]) => {
+        {Object.entries(params[model]).map(([key, value]) => {
           return <ParameterLine key={key} param={key} val={value} />;
         })}
         <div className="flex flex-row p-2 pb-4 border-x border-slate-400/50 items-center">
-          <h1 className="text-slate-400 pr-4 w-[60px]">Parent</h1>
-          <div className="bg-slate-600 rounded border border-slate-500/30 p-1">
+          <h1 className="text-slate-400 pr-4 w-[70px]">Parent</h1>
+          <div className="bg-slate-600  w-[100px] rounded border border-slate-500/30 p-1">
             {"None"}
           </div>
         </div>
@@ -143,6 +149,7 @@ const Raybuild3r = () => {
         </div>
         <RB3Canvas
           model={model}
+          parameters={params}
           setShowInstanceDetails={setShowInstanceDetails}
         />
         {showInstanceDetails && <InstanceDetails />}

@@ -50,6 +50,13 @@ export function ParaxialLens({
   setOrbitControlsEnabled,
   setShowInstanceDetails
 }) {
+  const diameterR = diameter / 2;
+  const R1 = 25;
+  //vals for first surface
+  const thetaLength = Math.asin(diameterR / R1);
+  const x1 = diameterR / Math.tan(thetaLength);
+  const diff1 = R1 - x1;
+
   return (
     <Shape
       referenc={stop}
@@ -63,13 +70,13 @@ export function ParaxialLens({
       setOrbitControlsEnabled={setOrbitControlsEnabled}
       setShowInstanceDetails={setShowInstanceDetails}
     >
-      <mesh position={[0, -8.57, 0]}>
+      <mesh position={[0, -R1 + diff1, 0]}>
         {/*[0,1,6,0]*/}
-        <sphereGeometry args={[/*-*/ 10, 64, 64, 0, Math.PI * 2, 0, 0.5]} />
+        <sphereGeometry args={[R1, 64, 64, 0, Math.PI * 2, 0, thetaLength]} />
         {<meshStandardMaterial color={"#b9d9eb"} />}
       </mesh>
-      <mesh position={[0, 9 /*CT-R2T*/, 0]} rotation={[Math.PI, 0, 0]}>
-        <sphereGeometry args={[10, 64, 64, 0, Math.PI * 2, 0, 0.5]} />
+      <mesh position={[0, R1 - diff1, 0]} rotation={[Math.PI, 0, 0]}>
+        <sphereGeometry args={[R1, 64, 64, 0, Math.PI * 2, 0, thetaLength]} />
         {<meshStandardMaterial color={"#b9d9eb"} />}
       </mesh>
     </Shape>
@@ -96,7 +103,7 @@ export function ApertureStop({
         setOrbitControlsEnabled={setOrbitControlsEnabled}
         setShowInstanceDetails={setShowInstanceDetails}
       >
-        <torusGeometry args={[0.5, 0.1, 32, 32]} />
+        <torusGeometry args={[diameter / 2, 0.1, 32, 32]} />
         <meshStandardMaterial color={"gray"} />
       </Shape>
     </>
@@ -121,7 +128,6 @@ export function ThickLens({
   if (is1Concave) R1 = -R1;
   if (is2Concave) R2 = -R2;
 
-  //TODO FIX ALIGNMENT OF R1 TO 0 !!!
   const diameterR = diameter / 2;
 
   //vals for first surface
@@ -136,6 +142,15 @@ export function ThickLens({
 
   //vals for cylinder
   let h = CT - diff1 - diff2;
+
+  //pos2
+  let pos2 = 0;
+  if (is2Concave) {
+    pos2 = -diff1 - h - x2 - 2 * diff2;
+  } else {
+    pos2 = -diff1 - h + x2;
+  }
+
   //below may offset from 0
   if (is1Concave) h += 2 * diff1;
   if (is2Concave) h += 2 * diff2;
@@ -155,7 +170,7 @@ export function ThickLens({
         setShowInstanceDetails={setShowInstanceDetails}
       >
         <mesh
-          position={is1Concave ? [0, R1 - 2 * diff1, 0] : [0, -R1, 0]}
+          position={is1Concave ? [0, R1, 0] : [0, -R1, 0]}
           rotation={is1Concave ? [Math.PI, 0, 0] : [0, 0, 0]}
         >
           <sphereGeometry
@@ -163,16 +178,16 @@ export function ThickLens({
           />
           {<meshStandardMaterial color={"#b9d9eb"} side={DoubleSide} />}
         </mesh>
-        <mesh position={[0, -diff1 - h / 2, 0]}>
+        <mesh
+          position={is1Concave ? [0, diff1 - h / 2, 0] : [0, -diff1 - h / 2, 0]}
+        >
           <cylinderGeometry
             args={[diameterR, diameterR, h, segments, 16, true]}
           />
           {<meshStandardMaterial color={"#b9d9eb"} />}
         </mesh>
         <mesh
-          position={
-            is2Concave ? [0, -diff1 - h - x2, 0] : [0, -diff1 - h + x2, 0]
-          }
+          position={[0, pos2, 0]}
           rotation={is2Concave ? [0, 0, 0] : [Math.PI, 0, 0]}
         >
           <sphereGeometry

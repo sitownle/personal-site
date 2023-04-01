@@ -19,13 +19,17 @@ function OrbitController({ enabled }) {
   return <OrbitControls ref={controlsRef} args={[camera, gl.domElement]} />;
 }
 
-export default function RB3Canvas({ model, setShowInstanceDetails }) {
+export default function RB3Canvas({
+  model,
+  parameters,
+  setShowInstanceDetails
+}) {
   const [position, setPosition] = useState([0, 0, 0]);
   const [orbitControlsEnabled, setOrbitControlsEnabled] = useState(true);
   const models = {
     "Paraxial Lens": (
       <ParaxialLens
-        diameter={10}
+        diameter={parameters["Paraxial Lens"].Diameter}
         position={position}
         setPosition={setPosition}
         rotation={[0, 0, 0]}
@@ -35,11 +39,11 @@ export default function RB3Canvas({ model, setShowInstanceDetails }) {
     ),
     "Thick Lens": (
       <ThickLens
-        diameter={4}
-        R1={4}
-        R2={4}
-        CT={4}
-        material={{}}
+        diameter={parameters["Thick Lens"].Diameter}
+        R1={parameters["Thick Lens"].R1}
+        R2={parameters["Thick Lens"].R2}
+        CT={parameters["Thick Lens"].CT}
+        material={parameters["Thick Lens"].Material}
         position={position}
         setPosition={setPosition}
         rotation={[0, 0, 0]}
@@ -49,7 +53,7 @@ export default function RB3Canvas({ model, setShowInstanceDetails }) {
     ),
     "Aperture Stop": (
       <ApertureStop
-        diameter={2}
+        diameter={parameters["Aperture Stop"].Diameter}
         position={position}
         setPosition={setPosition}
         rotation={[0, 0, 0]}
@@ -70,7 +74,13 @@ export default function RB3Canvas({ model, setShowInstanceDetails }) {
           <meshStandardMaterial color="#aaa" toneMapped={false} />
         </Text>
         {models[model]}
-        <mesh position={[0, 3, 0]}>
+        <mesh position={[0, 0, 0]}>
+          <sphereGeometry
+            args={[0.5, 32, 32, 0, Math.PI * 2, 0, Math.PI * 2]}
+          />
+          <meshStandardMaterial color="#00FF00" toneMapped={false} />
+        </mesh>
+        <mesh position={[4, 0, 0]}>
           <sphereGeometry
             args={[0.5, 32, 32, 0, Math.PI * 2, 0, Math.PI * 2]}
           />
