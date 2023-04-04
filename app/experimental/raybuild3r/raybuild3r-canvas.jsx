@@ -5,7 +5,12 @@ import { useRef, useState, useEffect } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Text, OrbitControls } from "@react-three/drei";
 //import { EffectComposer, Bloom } from "@react-three/postprocessing";
-import { ParaxialLens, ThickLens, ApertureStop } from "./models.js";
+import {
+  ParaxialLens,
+  ThickLens,
+  ApertureStop,
+  PointSource
+} from "./models.js";
 
 function OrbitController({ enabled }) {
   const { camera, gl } = useThree();
@@ -24,6 +29,7 @@ export default function RB3Canvas({
   parameters,
   setShowInstanceDetails
 }) {
+  const [sourcePos, setSourcePos] = useState([-5, 0, 0]);
   const [position, setPosition] = useState([0, 0, 0]);
   const [orbitControlsEnabled, setOrbitControlsEnabled] = useState(true);
   const models = {
@@ -73,8 +79,16 @@ export default function RB3Canvas({
           {model}
           <meshStandardMaterial color="#aaa" toneMapped={false} />
         </Text>
+        <PointSource
+          position={sourcePos}
+          setPosition={setSourcePos}
+          rotation={[0, 0, 0]}
+          setOrbitControlsEnabled={setOrbitControlsEnabled}
+          setShowInstanceDetails={setShowInstanceDetails}
+        />
+        {/*<Rays />*/}
         {models[model]}
-        <mesh position={[0, 0, 0]}>
+        {/* <mesh position={[0, 0, 0]}>
           <sphereGeometry
             args={[0.5, 32, 32, 0, Math.PI * 2, 0, Math.PI * 2]}
           />
@@ -85,7 +99,7 @@ export default function RB3Canvas({
             args={[0.5, 32, 32, 0, Math.PI * 2, 0, Math.PI * 2]}
           />
           <meshStandardMaterial color="#00FF00" toneMapped={false} />
-        </mesh>
+        </mesh> */}
         <OrbitController enabled={orbitControlsEnabled} />
         {/* <EffectComposer>
         <Bloom mipmapBlur luminanceThreshold={1} radius={0.4} />

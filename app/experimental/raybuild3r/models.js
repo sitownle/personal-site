@@ -1,6 +1,6 @@
-import React, { useRef } from "react";
+import React, { useRef, useMemo } from "react";
 //import { Canvas, useFrame } from "@react-three/fiber";
-import { DoubleSide } from "three";
+import { DoubleSide, SphereGeometry, CylinderGeometry } from "three";
 import { useDrag } from "@use-gesture/react";
 //import { EffectComposer, Bloom } from "@react-three/postprocessing";
 
@@ -141,19 +141,46 @@ export function ThickLens({
   const diff2 = R2 - x2;
 
   //vals for cylinder
+  //TODO fix logic to use const?
   let h = CT - diff1 - diff2;
 
-  //pos2
-  let pos2 = 0;
-  if (is2Concave) {
-    pos2 = -diff1 - h - x2 - 2 * diff2;
-  } else {
-    pos2 = -diff1 - h + x2;
-  }
+  const pos2 = is2Concave ? -diff1 - h - x2 - 2 * diff2 : -diff1 - h + x2;
 
   //below may offset from 0
   if (is1Concave) h += 2 * diff1;
   if (is2Concave) h += 2 * diff2;
+
+  // const totalGeo = useMemo(() => {
+  //   const firstSurfGeo = new SphereGeometry(
+  //     R1,
+  //     segments,
+  //     segments,
+  //     0,
+  //     Math.PI * 2,
+  //     0,
+  //     thetaLength
+  //   );
+  //   const centerCylinderGeo = new CylinderGeometry(
+  //     diameterR,
+  //     diameterR,
+  //     h,
+  //     segments,
+  //     16,
+  //     true
+  //   );
+  //   const secondSurfGeo = new SphereGeometry(
+  //     R2,
+  //     segments,
+  //     segments,
+  //     0,
+  //     Math.PI * 2,
+  //     0,
+  //     thetaLength2
+  //   );
+  //   firstSurfGeo.merge(centerCylinderGeo);
+  //   firstSurfGeo.merge(secondSurfGeo);
+  //   return firstSurfGeo;
+  // }, [R1, thetaLength, CT, R2, thetaLength2, diameterR, h]);
 
   return (
     <>
@@ -169,6 +196,9 @@ export function ThickLens({
         setOrbitControlsEnabled={setOrbitControlsEnabled}
         setShowInstanceDetails={setShowInstanceDetails}
       >
+        {/* <mesh geometry={totalGeo} position={[0, 0, 0]}>
+          <meshStandardMaterial color={"#b9d9eb"} side={DoubleSide} />
+        </mesh> */}
         <mesh
           position={is1Concave ? [0, R1, 0] : [0, -R1, 0]}
           rotation={is1Concave ? [Math.PI, 0, 0] : [0, 0, 0]}
@@ -199,6 +229,47 @@ export function ThickLens({
       {/* <EffectComposer>
         <Bloom mipmapBlur luminanceThreshold={1} radius={0.4} />
       </EffectComposer>{" "} */}
+    </>
+  );
+}
+
+export function PointSource({
+  position,
+  setPosition,
+  rotation,
+  setOrbitControlsEnabled,
+  setShowInstanceDetails
+}) {
+  const source = useRef();
+
+  return (
+    <>
+      <Shape
+        referenc={source}
+        position={position}
+        setPosition={setPosition}
+        rotation={[rotation[0], rotation[1] + Math.PI / 2, rotation[2]]}
+        setOrbitControlsEnabled={setOrbitControlsEnabled}
+        setShowInstanceDetails={setShowInstanceDetails}
+      >
+        <mesh position={[0, 0, 0]}>
+          <sphereGeometry
+            args={[0.2, 32, 32, 0, Math.PI * 2, 0, Math.PI * 2]}
+          />
+          <meshStandardMaterial color={"yellow"} />
+        </mesh>
+        <mesh position={[0, 0, 2.5]} rotation={[-Math.PI / 2, 0, 0]}>
+          <cylinderGeometry args={[0.01, 3, 5, 32, 16, true]} />
+          {
+            <meshStandardMaterial
+              color={"yellow"}
+              side={DoubleSide}
+              opacity={0.5}
+              transparent={true}
+            />
+          }
+        </mesh>
+      </Shape>
     </>
   );
 }
