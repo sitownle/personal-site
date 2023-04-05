@@ -9,7 +9,9 @@ import {
   ParaxialLens,
   ThickLens,
   ApertureStop,
-  PointSource
+  PointSource,
+  Mirror,
+  BeamSplitter
 } from "./models.js";
 
 function OrbitController({ enabled }) {
@@ -60,6 +62,26 @@ export default function RB3Canvas({
     "Aperture Stop": (
       <ApertureStop
         diameter={parameters["Aperture Stop"].Diameter}
+        position={position}
+        setPosition={setPosition}
+        rotation={[0, 0, 0]}
+        setOrbitControlsEnabled={setOrbitControlsEnabled}
+        setShowInstanceDetails={setShowInstanceDetails}
+      />
+    ),
+    Mirror: (
+      <Mirror
+        diameter={parameters["Mirror"].Diameter}
+        position={position}
+        setPosition={setPosition}
+        rotation={[0, 0, 0]}
+        setOrbitControlsEnabled={setOrbitControlsEnabled}
+        setShowInstanceDetails={setShowInstanceDetails}
+      />
+    ),
+    "Beam Splitter": (
+      <BeamSplitter
+        diameter={parameters["Beam Splitter"].Diameter}
         position={position}
         setPosition={setPosition}
         rotation={[0, 0, 0]}

@@ -1,7 +1,14 @@
 import React, { useRef, useMemo } from "react";
 //import { Canvas, useFrame } from "@react-three/fiber";
-import { DoubleSide, SphereGeometry, CylinderGeometry } from "three";
+import {
+  DoubleSide,
+  Mesh,
+  SphereGeometry,
+  CylinderGeometry,
+  MeshStandardMaterial
+} from "three";
 import { useDrag } from "@use-gesture/react";
+import { Merged } from "@react-three/drei";
 //import { EffectComposer, Bloom } from "@react-three/postprocessing";
 
 function Shape({
@@ -142,6 +149,13 @@ export function ThickLens({
 
   //vals for cylinder
   //TODO fix logic to use const?
+  // const h = is1Concave
+  //   ? is2Concave
+  //     ? CT + diff1 + diff2
+  //     : CT + diff1 - diff2
+  //   : is2Concave
+  //   ? CT - diff1 + diff2
+  //   : CT - diff1 - diff2;
   let h = CT - diff1 - diff2;
 
   const pos2 = is2Concave ? -diff1 - h - x2 - 2 * diff2 : -diff1 - h + x2;
@@ -149,38 +163,6 @@ export function ThickLens({
   //below may offset from 0
   if (is1Concave) h += 2 * diff1;
   if (is2Concave) h += 2 * diff2;
-
-  // const totalGeo = useMemo(() => {
-  //   const firstSurfGeo = new SphereGeometry(
-  //     R1,
-  //     segments,
-  //     segments,
-  //     0,
-  //     Math.PI * 2,
-  //     0,
-  //     thetaLength
-  //   );
-  //   const centerCylinderGeo = new CylinderGeometry(
-  //     diameterR,
-  //     diameterR,
-  //     h,
-  //     segments,
-  //     16,
-  //     true
-  //   );
-  //   const secondSurfGeo = new SphereGeometry(
-  //     R2,
-  //     segments,
-  //     segments,
-  //     0,
-  //     Math.PI * 2,
-  //     0,
-  //     thetaLength2
-  //   );
-  //   firstSurfGeo.merge(centerCylinderGeo);
-  //   firstSurfGeo.merge(secondSurfGeo);
-  //   return firstSurfGeo;
-  // }, [R1, thetaLength, CT, R2, thetaLength2, diameterR, h]);
 
   return (
     <>
@@ -196,10 +178,58 @@ export function ThickLens({
         setOrbitControlsEnabled={setOrbitControlsEnabled}
         setShowInstanceDetails={setShowInstanceDetails}
       >
-        {/* <mesh geometry={totalGeo} position={[0, 0, 0]}>
-          <meshStandardMaterial color={"#b9d9eb"} side={DoubleSide} />
-        </mesh> */}
-        <mesh
+        <Merged
+          meshes={[
+            new Mesh(
+              new SphereGeometry(
+                R1,
+                segments,
+                segments,
+                0,
+                Math.PI * 2,
+                0,
+                thetaLength
+              ),
+              new MeshStandardMaterial()
+            ),
+            new Mesh(
+              new CylinderGeometry(diameterR, diameterR, h, segments, 16, true),
+              new MeshStandardMaterial()
+            ),
+            new Mesh(
+              new SphereGeometry(
+                R2,
+                segments,
+                segments,
+                0,
+                Math.PI * 2,
+                0,
+                thetaLength2
+              ),
+              new MeshStandardMaterial()
+            )
+          ]}
+          position={[0, 0, 0]}
+        >
+          {(FirstSurfMesh, CenterCylinderMesh, SecondSurfMesh) => (
+            <>
+              <FirstSurfMesh
+                position={is1Concave ? [0, R1, 0] : [0, -R1, 0]}
+                rotation={is1Concave ? [Math.PI, 0, 0] : [0, 0, 0]}
+              />
+              <CenterCylinderMesh
+                position={
+                  is1Concave ? [0, diff1 - h / 2, 0] : [0, -diff1 - h / 2, 0]
+                }
+              />
+              <SecondSurfMesh
+                position={[0, pos2, 0]}
+                rotation={is2Concave ? [0, 0, 0] : [Math.PI, 0, 0]}
+              />
+            </>
+          )}
+        </Merged>
+        {/* <mesh
           position={is1Concave ? [0, R1, 0] : [0, -R1, 0]}
           rotation={is1Concave ? [Math.PI, 0, 0] : [0, 0, 0]}
         >
@@ -224,7 +254,7 @@ export function ThickLens({
             args={[R2, segments, segments, 0, Math.PI * 2, 0, thetaLength2]}
           />
           {<meshStandardMaterial color={"#b9d9eb"} side={DoubleSide} />}
-        </mesh>
+        </mesh> */}
       </Shape>
       {/* <EffectComposer>
         <Bloom mipmapBlur luminanceThreshold={1} radius={0.4} />
@@ -269,6 +299,60 @@ export function PointSource({
             />
           }
         </mesh>
+      </Shape>
+    </>
+  );
+}
+
+export function Mirror({
+  diameter,
+  position,
+  setPosition,
+  rotation,
+  setOrbitControlsEnabled,
+  setShowInstanceDetails
+}) {
+  const mirror = useRef();
+
+  return (
+    <>
+      <Shape
+        referenc={mirror}
+        position={[position[0] + diameter / 2, position[1], position[2]]}
+        setPosition={setPosition}
+        rotation={rotation}
+        setOrbitControlsEnabled={setOrbitControlsEnabled}
+        setShowInstanceDetails={setShowInstanceDetails}
+      >
+        <boxGeometry args={[diameter, diameter, diameter, 32, 32, 32]} />
+        <meshStandardMaterial color={"gray"} />
+      </Shape>
+    </>
+  );
+}
+
+export function BeamSplitter({
+  diameter,
+  position,
+  setPosition,
+  rotation,
+  setOrbitControlsEnabled,
+  setShowInstanceDetails
+}) {
+  const beamSplitter = useRef();
+
+  return (
+    <>
+      <Shape
+        referenc={beamSplitter}
+        position={[position[0] + diameter / 2, position[1], position[2]]}
+        setPosition={setPosition}
+        rotation={rotation}
+        setOrbitControlsEnabled={setOrbitControlsEnabled}
+        setShowInstanceDetails={setShowInstanceDetails}
+      >
+        <boxGeometry args={[diameter, diameter, diameter, 32, 32, 32]} />
+        <meshStandardMaterial color={"gray"} />
       </Shape>
     </>
   );

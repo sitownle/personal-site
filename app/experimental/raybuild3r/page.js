@@ -13,7 +13,9 @@ const parameters = {
     Sag1: 0,
     Sag2: 0,
     Material: "None"
-  }
+  },
+  Mirror: { Diameter: 4 },
+  "Beam Splitter": { Diameter: 4 }
 };
 
 const Raybuild3r = () => {
@@ -146,6 +148,8 @@ const Raybuild3r = () => {
           <HeaderButton title="Paraxial Lens" />
           <HeaderButton title="Thick Lens" />
           <HeaderButton title="Aperture Stop" />
+          <HeaderButton title="Mirror" />
+          <HeaderButton title="Beam Splitter" />
         </div>
         <RB3Canvas
           model={model}
