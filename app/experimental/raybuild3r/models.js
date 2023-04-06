@@ -1,5 +1,4 @@
 import React, { useRef, useMemo } from "react";
-//import { Canvas, useFrame } from "@react-three/fiber";
 import {
   DoubleSide,
   Mesh,
@@ -8,8 +7,12 @@ import {
   MeshStandardMaterial
 } from "three";
 import { useDrag } from "@use-gesture/react";
-import { Merged } from "@react-three/drei";
-//import { EffectComposer, Bloom } from "@react-three/postprocessing";
+import { Merged, useTexture } from "@react-three/drei";
+// import colorMap from "./textures/Plastic_003_basecolor.jpg";
+// import heightMap from "./textures/Plastic_003_height.jpg";
+// import normalMap from "./textures/Plastic_003_normal.jpg";
+// import roughnessMap from "./textures/Plastic_003_roughness.jpg";
+// import aoMap from "./textures/Plastic_003_ambientOcclusion.jpg";
 
 function Shape({
   referenc,
@@ -24,6 +27,13 @@ function Shape({
     setPosition([x / 50, -y / 50, 0])
   );
 
+  // const glassTexture = useTexture({
+  //   map: "/textures/Plastic_003_basecolor.jpg",
+  //   displacementMap: "/textures/Plastic_003_height.jpg",
+  //   normalMap: "/textures/Plastic_003_normal.jpg",
+  //   roughnessMap: "/textures/Plastic_003_roughness.jpg",
+  //   aoMap: "/textures/Plastic_003_ambientOcclusion.jpg"
+  // });
   //   useFrame(() => {
   //     referenc.current.rotation.x += 0.01;
   //     referenc.current.rotation.y += 0.01;
@@ -43,6 +53,8 @@ function Shape({
           {...bind()}
         >
           {children}
+          <meshStandardMaterial color={[0, 5, 0.2]} toneMapped={true} />
+          {/*...glassTexture*/}
         </mesh>
       </group>
     </>
@@ -111,7 +123,7 @@ export function ApertureStop({
         setShowInstanceDetails={setShowInstanceDetails}
       >
         <torusGeometry args={[diameter / 2, 0.1, 32, 32]} />
-        <meshStandardMaterial color={"gray"} />
+        <meshStandardMaterial color={"white"} />
       </Shape>
     </>
   );
@@ -286,16 +298,24 @@ export function PointSource({
           <sphereGeometry
             args={[0.2, 32, 32, 0, Math.PI * 2, 0, Math.PI * 2]}
           />
-          <meshStandardMaterial color={"yellow"} />
+          <meshStandardMaterial color={"#FFFFA5"} toneMapped={false} />
         </mesh>
         <mesh position={[0, 0, 2.5]} rotation={[-Math.PI / 2, 0, 0]}>
           <cylinderGeometry args={[0.01, 3, 5, 32, 16, true]} />
           {
             <meshStandardMaterial
               color={"yellow"}
+              toneMapped={false}
               side={DoubleSide}
-              opacity={0.5}
-              transparent={true}
+              opacity={0.3}
+              transparent
+              emissive="#FFFFA5" //"#FFFF00"
+              clearcoat={1}
+              //transmission={0.9} // add transmission property to simulate light passing through the material
+              //transmissionIntensity={0.5} // adjust the transmissionIntensity value
+              // emissiveIntensity={3}
+              // metalness={0.5}
+              // roughness={0.5}
             />
           }
         </mesh>

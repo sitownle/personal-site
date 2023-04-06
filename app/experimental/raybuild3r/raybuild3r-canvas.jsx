@@ -5,6 +5,8 @@ import { useRef, useState, useEffect } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Text, OrbitControls } from "@react-three/drei";
 //import { EffectComposer, Bloom } from "@react-three/postprocessing";
+import { EffectComposer } from "../../effect-composer-test";
+import { Bloom } from "../../bloom-test";
 import {
   ParaxialLens,
   ThickLens,
@@ -99,7 +101,7 @@ export default function RB3Canvas({
         <pointLight position={[-10, -10, -10]} />
         <Text position={[0, 7, 0]} fontSize={1}>
           {model}
-          <meshStandardMaterial color="#aaa" toneMapped={false} />
+          <meshStandardMaterial color="#aaa" />
         </Text>
         <PointSource
           position={sourcePos}
@@ -123,9 +125,14 @@ export default function RB3Canvas({
           <meshStandardMaterial color="#00FF00" toneMapped={false} />
         </mesh> */}
         <OrbitController enabled={orbitControlsEnabled} />
-        {/* <EffectComposer>
-        <Bloom mipmapBlur luminanceThreshold={1} radius={0.4} />
-      </EffectComposer> */}
+        <EffectComposer>
+          <Bloom
+            mipmapBlur
+            luminanceThreshold={0.9}
+            luminanceSmoothing={0.9}
+            /*luminanceThreshold={1}*/ radius={0.2}
+          />
+        </EffectComposer>
       </Canvas>
     </>
   );

@@ -5,6 +5,8 @@ import { useRef, useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Text } from "@react-three/drei";
+import { EffectComposer } from "./effect-composer-test";
+import { Bloom } from "./bloom-test";
 //import { EffectComposer, Bloom } from "@react-three/postprocessing";
 
 function Node(props) {
@@ -104,9 +106,7 @@ function Connection(props) {
 
 export default function Graph() {
   const router = useRouter();
-  const [text, setText] = useState(
-    "ugly until @react-three/postprocessing fixed in app router!"
-  );
+  const [text, setText] = useState("Welcome!");
   const [link, setLink] = useState("");
   const nodeXs = [-10, -5, 0, 5, 10];
 
@@ -218,9 +218,9 @@ export default function Graph() {
           {text}
           <meshStandardMaterial color="#aaa" toneMapped={false} />
         </Text>
-        {/* <EffectComposer>
+        <EffectComposer>
           <Bloom mipmapBlur luminanceThreshold={1} radius={0.4} />
-        </EffectComposer> */}
+        </EffectComposer>
       </Canvas>
     </>
   );
