@@ -10,7 +10,7 @@ const descriptions = {
   "rays.ai":
     "My first job! I built, deployed, and managed all parts of the website, the most significant of which was the graphical editor for optical design exploration with collaborative editing, unlimited undo/redo and a microservice written in golang for powering ray tracing computations",
   raybuild3r:
-    "a 3D continuation of my work at rays.ai as a favor to my boss and to take my Three.js skills to the moon"
+    "a 3D continuation of my work at rays.ai as a favor to my boss and to take my Three.js skills to the moon. If I can figure out how to make textures look good this might be worth pursuing in prod"
 };
 
 const ProjectIndex = () => {
@@ -24,7 +24,7 @@ const ProjectIndex = () => {
         return (
           <a
             href={links[project]}
-            className="group p-4 flex flex-col gap-4 rounded text-slate-400 hover:text-slate-200 hover:bg-slate-700 cursor-pointer transition-all border border-slate-900 hover:border-slate-500"
+            className="w-full group p-4 flex flex-col gap-4 rounded text-slate-400 hover:text-slate-200 hover:bg-slate-700 cursor-pointer transition-all border border-slate-900 hover:border-slate-500"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -38,7 +38,7 @@ const ProjectIndex = () => {
       return (
         <Link
           href={`/experimental/${project}`}
-          className="group p-4 flex flex-col gap-2 rounded text-slate-400 hover:text-slate-200 hover:bg-slate-700 cursor-pointer transition-all border border-slate-900 hover:border-slate-500"
+          className="w-full group p-4 flex flex-col gap-2 rounded text-slate-400 hover:text-slate-200 hover:bg-slate-700 cursor-pointer transition-all border border-slate-900 hover:border-slate-500"
         >
           <div className="flex gap-[4px]">
             <p>{project}</p>

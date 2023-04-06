@@ -22,6 +22,16 @@ const Raybuild3r = () => {
   const [model, setModel] = useState("Paraxial Lens");
   const [showInstanceDetails, setShowInstanceDetails] = useState(false);
   const [params, setParams] = useState(parameters);
+  const [position, setPos] = useState([0, 0, 0]);
+
+  function setPosition(rawPos) {
+    const fixedPos = [
+      rawPos[0].toFixed(3),
+      rawPos[1].toFixed(3),
+      rawPos[2].toFixed(3)
+    ];
+    setPos(fixedPos);
+  }
 
   function HeaderButton({ title }) {
     return (
@@ -48,7 +58,7 @@ const Raybuild3r = () => {
         <div className="flex flex-row p-2 border-x border-slate-400/50 items-center">
           <h1 className="text-slate-400 pr-4 w-[70px]">{param}</h1>
           <input
-            className="peer bg-slate-600 rounded border border-slate-500/30 p-1 w-[100px]"
+            className="peer bg-slate-600 rounded border border-slate-500/30 p-1 w-[190px]"
             defaultValue={val}
             onBlur={e => submit(e)}
             onKeyDown={e => {
@@ -66,7 +76,7 @@ const Raybuild3r = () => {
     }
 
     return (
-      <div className="absolute top-[14vh] left-[1vh] z-1 bg-slate-700 w-[250px] border-b border-slate-400/50 rounded text-sm flex flex-col">
+      <div className="absolute top-[14vh] left-[1vh] z-1 bg-slate-700 w-[280px] border-b border-slate-400/50 rounded text-sm flex flex-col">
         <div className="flex flex-row justify-between p-2 border border-slate-400/50 rounded-t">
           <h1>Instance Details</h1>
           <button onClick={() => setShowInstanceDetails(false)}>X</button>
@@ -74,7 +84,7 @@ const Raybuild3r = () => {
         <div className="flex flex-row p-2 border-x border-slate-400/50 items-center">
           <h1 className="text-slate-400 pr-4 w-[70px]">Type</h1>
           <input
-            className="bg-slate-600 rounded border border-slate-500/30 p-1 w-[100px]"
+            className="bg-slate-600 rounded border border-slate-500/30 p-1 w-[190px]"
             defaultValue={model}
           />
         </div>
@@ -82,35 +92,35 @@ const Raybuild3r = () => {
           <h1 className="text-slate-400 pr-4 w-[60px]">Position</h1>
           <p className="text-slate-300">{"x"}</p>
           <input
-            className="bg-slate-600 rounded border border-slate-500/30 p-1 ml-1 mr-2 w-[20px]"
-            defaultValue={"0"}
+            className="bg-slate-600 rounded border border-slate-500/30 p-1 ml-1 mr-2 w-[50px] text-xs"
+            defaultValue={position[0]}
           />
           <p className="text-slate-300">{"y"}</p>
           <input
-            className="bg-slate-600 rounded border border-slate-500/30 p-1 ml-1 mr-2 w-[20px]"
-            defaultValue={"0"}
+            className="bg-slate-600 rounded border border-slate-500/30 p-1 ml-1 mr-2 w-[50px] text-xs"
+            defaultValue={position[1]}
           />
           <p className="text-slate-300">{"z"}</p>
           <input
-            className="bg-slate-600 rounded border border-slate-500/30 p-1 ml-1 w-[20px]"
-            defaultValue={"0"}
+            className="bg-slate-600 rounded border border-slate-500/30 p-1 ml-1 w-[50px] text-xs"
+            defaultValue={position[2]}
           />
         </div>
         <div className="flex flex-row p-2 border-x border-slate-400/50 items-center">
           <h1 className="text-slate-400 pr-4 w-[60px]">Rotation</h1>
-          <p className="text-slate-300">{"x"}</p>
+          <p className="text-slate-300 text-xs">{"x"}</p>
           <input
-            className="bg-slate-600 rounded border border-slate-500/30 p-1 ml-1 mr-2 w-[20px]"
+            className="bg-slate-600 text-xs rounded border border-slate-500/30 p-1 ml-1 mr-2 w-[50px]"
             defaultValue={"0"}
           />
           <p className="text-slate-300">{"y"}</p>
           <input
-            className="bg-slate-600 rounded border border-slate-500/30 p-1 ml-1 mr-2 w-[20px]"
+            className="bg-slate-600 text-xs rounded border border-slate-500/30 p-1 ml-1 mr-2 w-[50px]"
             defaultValue={"0"}
           />
           <p className="text-slate-300">{"z"}</p>
           <input
-            className="bg-slate-600 rounded border border-slate-500/30 p-1 ml-1 w-[20px]"
+            className="bg-slate-600 text-xs rounded border border-slate-500/30 p-1 ml-1 w-[50px]"
             defaultValue={"0"}
           />
         </div>
@@ -119,7 +129,7 @@ const Raybuild3r = () => {
         })}
         <div className="flex flex-row p-2 pb-4 border-x border-slate-400/50 items-center">
           <h1 className="text-slate-400 pr-4 w-[70px]">Parent</h1>
-          <div className="bg-slate-600  w-[100px] rounded border border-slate-500/30 p-1">
+          <div className="bg-slate-600  w-[190px] rounded border border-slate-500/30 p-1">
             {"None"}
           </div>
         </div>
@@ -155,8 +165,12 @@ const Raybuild3r = () => {
           model={model}
           parameters={params}
           setShowInstanceDetails={setShowInstanceDetails}
+          position={position}
+          setPosition={setPosition}
         />
-        {showInstanceDetails && <InstanceDetails />}
+        {showInstanceDetails && (
+          <InstanceDetails /*position={position} setPosition={setPosition}*/ />
+        )}
       </div>
     </>
   );

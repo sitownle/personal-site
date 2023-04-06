@@ -31,10 +31,12 @@ function OrbitController({ enabled }) {
 export default function RB3Canvas({
   model,
   parameters,
-  setShowInstanceDetails
+  setShowInstanceDetails,
+  position,
+  setPosition
 }) {
   const [sourcePos, setSourcePos] = useState([-5, 0, 0]);
-  const [position, setPosition] = useState([0, 0, 0]);
+  //const [position, setPosition] = useState([0, 0, 0]);
   const [orbitControlsEnabled, setOrbitControlsEnabled] = useState(true);
   const models = {
     "Paraxial Lens": (
