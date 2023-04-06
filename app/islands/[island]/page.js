@@ -108,7 +108,7 @@ export default function Island(context) {
   return (
     <>
       <div className="min-h-[95vh] w-full md:flex items-center md:items-start md:flex-row gap-4">
-        <NeuronSidebar children={getBridges()} />
+        <NeuronSidebar>{getBridges()}</NeuronSidebar>
         <div className="w-[90%] md:w-2/3 flex flex-col gap-6 mt-6 px-2 mx-auto md:mx-0">
           <h1 className="text-3xl text-center">
             {title ? changeCase(title) : null}

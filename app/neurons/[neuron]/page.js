@@ -225,7 +225,7 @@ export default function Neuron(context) {
             return <Synapse neuron={key[0]} key={value} />;
           })}
         </div> */}
-        <NeuronSidebar children={getSynapses()} />
+        <NeuronSidebar>{getSynapses()}</NeuronSidebar>
         <div className="w-[90%] md:w-2/3 flex flex-col gap-6 mt-6 px-2 mx-auto md:mx-0">
           <h1 className="text-3xl text-center">
             {title ? changeCase(title) : null}
