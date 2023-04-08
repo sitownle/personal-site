@@ -15,6 +15,7 @@ import {
   Mirror,
   BeamSplitter
 } from "./models.js";
+import useRayBuild3rStore from "./rayBuild3rStore";
 
 function OrbitController({ enabled }) {
   const { camera, gl } = useThree();
@@ -32,11 +33,12 @@ export default function RB3Canvas({
   model,
   parameters,
   setShowInstanceDetails,
-  position,
+  //position,
   setPosition
 }) {
   const [sourcePos, setSourcePos] = useState([-5, 0, 0]);
   //const [position, setPosition] = useState([0, 0, 0]);
+  const position = useRayBuild3rStore(state => state.position);
   const [orbitControlsEnabled, setOrbitControlsEnabled] = useState(true);
   const models = {
     "Paraxial Lens": (

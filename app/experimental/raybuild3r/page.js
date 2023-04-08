@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import RB3Canvas from "./raybuild3r-canvas";
+import useRayBuild3rStore from "./rayBuild3rStore";
 
 const parameters = {
   "Paraxial Lens": { Diameter: 6, Power: 0 },
@@ -22,8 +23,12 @@ const Raybuild3r = () => {
   const [model, setModel] = useState("Paraxial Lens");
   const [showInstanceDetails, setShowInstanceDetails] = useState(false);
   const [params, setParams] = useState(parameters);
-  const [position, setPos] = useState([0, 0, 0]);
+  //const [position, setPos] = useState([0, 0, 0]);
 
+  //const position = useRayBuild3rStore(state => state.position);
+  const setPos = useRayBuild3rStore(state => state.setPos);
+
+  console.log("RENDER RAYBUILD3R");
   function setPosition(rawPos) {
     const fixedPos = [
       rawPos[0].toFixed(3),
@@ -36,7 +41,7 @@ const Raybuild3r = () => {
   function HeaderButton({ title }) {
     return (
       <button
-        className="text-slate-200 text-sm px-2 border border-slate-800 rounded-lg bg-gradient-to-l from-slate-800 to-black shadow-md hover:bg-gradient-to-r hover:from-slate-800 hover:to-black transition-colors"
+        className="text-slate-200 text-sm px-2 border border-slate-800 rounded-lg bg-gradient-to-l from-slate-700 to-black shadow-md hover:bg-gradient-to-r hover:from-slate-700 hover:to-black transition-colors"
         onClick={() => setModel(title)}
       >
         {title}
@@ -45,6 +50,7 @@ const Raybuild3r = () => {
   }
 
   function InstanceDetails({}) {
+    console.log("RENDER InstanceDetails");
     function ParameterLine({ param, val }) {
       function submit(e) {
         console.log("submitted!");
@@ -75,11 +81,54 @@ const Raybuild3r = () => {
       );
     }
 
+    function PositionRow({ isPosition }) {
+      const position = isPosition
+        ? useRayBuild3rStore(state => state.position)
+        : [0, 0, 0];
+      //const setPos = useRayBuild3rStore(state => state.setPos);
+      // function setPosition(rawPos) {
+      //   const fixedPos = [
+      //     rawPos[0].toFixed(3),
+      //     rawPos[1].toFixed(3),
+      //     rawPos[2].toFixed(3)
+      //   ];
+      //   setPos(fixedPos);
+      // }
+
+      function PositionInput({ pos }) {
+        return (
+          <input
+            className="bg-slate-600 rounded border border-slate-500/30 p-1 ml-1 mr-2 w-[50px] text-xs"
+            defaultValue={pos}
+          />
+        );
+      }
+
+      return (
+        <div className="flex flex-row p-2 border-x border-slate-400/50 items-center">
+          <h1 className="text-slate-400 pr-4 w-[60px]">
+            {isPosition ? "Position" : "Rotation"}
+          </h1>
+          <p className="text-slate-300">{"x"}</p>
+          <PositionInput pos={position[0]} />
+          <p className="text-slate-300">{"y"}</p>
+          <PositionInput pos={position[1]} />
+          <p className="text-slate-300">{"z"}</p>
+          <PositionInput pos={position[2]} />
+        </div>
+      );
+    }
+
     return (
       <div className="absolute top-[14vh] left-[1vh] z-1 bg-slate-700 w-[280px] border-b border-slate-400/50 rounded text-sm flex flex-col">
         <div className="flex flex-row justify-between p-2 border border-slate-400/50 rounded-t">
           <h1>Instance Details</h1>
-          <button onClick={() => setShowInstanceDetails(false)}>X</button>
+          <button
+            className="transition-colors hover:text-slate-900 hover:bg-slate-400/50 rounded w-[20px]"
+            onClick={() => setShowInstanceDetails(false)}
+          >
+            &#10005;
+          </button>
         </div>
         <div className="flex flex-row p-2 border-x border-slate-400/50 items-center">
           <h1 className="text-slate-400 pr-4 w-[70px]">Type</h1>
@@ -88,25 +137,9 @@ const Raybuild3r = () => {
             defaultValue={model}
           />
         </div>
-        <div className="flex flex-row p-2 border-x border-slate-400/50 items-center">
-          <h1 className="text-slate-400 pr-4 w-[60px]">Position</h1>
-          <p className="text-slate-300">{"x"}</p>
-          <input
-            className="bg-slate-600 rounded border border-slate-500/30 p-1 ml-1 mr-2 w-[50px] text-xs"
-            defaultValue={position[0]}
-          />
-          <p className="text-slate-300">{"y"}</p>
-          <input
-            className="bg-slate-600 rounded border border-slate-500/30 p-1 ml-1 mr-2 w-[50px] text-xs"
-            defaultValue={position[1]}
-          />
-          <p className="text-slate-300">{"z"}</p>
-          <input
-            className="bg-slate-600 rounded border border-slate-500/30 p-1 ml-1 w-[50px] text-xs"
-            defaultValue={position[2]}
-          />
-        </div>
-        <div className="flex flex-row p-2 border-x border-slate-400/50 items-center">
+        <PositionRow isPosition={true} />
+        <PositionRow isPosition={false} />
+        {/* <div className="flex flex-row p-2 border-x border-slate-400/50 items-center">
           <h1 className="text-slate-400 pr-4 w-[60px]">Rotation</h1>
           <p className="text-slate-300 text-xs">{"x"}</p>
           <input
@@ -123,7 +156,7 @@ const Raybuild3r = () => {
             className="bg-slate-600 text-xs rounded border border-slate-500/30 p-1 ml-1 w-[50px]"
             defaultValue={"0"}
           />
-        </div>
+        </div> */}
         {Object.entries(params[model]).map(([key, value]) => {
           return <ParameterLine key={key} param={key} val={value} />;
         })}
@@ -165,7 +198,7 @@ const Raybuild3r = () => {
           model={model}
           parameters={params}
           setShowInstanceDetails={setShowInstanceDetails}
-          position={position}
+          //position={position}
           setPosition={setPosition}
         />
         {showInstanceDetails && (
