@@ -27,8 +27,6 @@ const Raybuild3r = () => {
 
   //const position = useRayBuild3rStore(state => state.position);
   const setPos = useRayBuild3rStore(state => state.setPos);
-
-  console.log("RENDER RAYBUILD3R");
   function setPosition(rawPos) {
     const fixedPos = [
       rawPos[0].toFixed(3),
@@ -50,7 +48,6 @@ const Raybuild3r = () => {
   }
 
   function InstanceDetails({}) {
-    console.log("RENDER InstanceDetails");
     function ParameterLine({ param, val }) {
       function submit(e) {
         console.log("submitted!");

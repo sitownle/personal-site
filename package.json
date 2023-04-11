@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@clerk/nextjs": "^4.15.0",
     "@react-three/drei": "^9.64.0",
     "@react-three/fiber": "^8.10.0",
     "@react-three/postprocessing": "^2.7.1",

@@ -1,16 +1,24 @@
 import Link from "next/link";
 
-const projects = ["rays.ai", "auto-resize", "enchrome", "raybuild3r"];
+const projects = [
+  "rays.ai",
+  "raybuild3r",
+  "mesmery",
+  "auto-resize",
+  "enchrome"
+];
 const links = { "rays.ai": "https://rays.ai" };
 const descriptions = {
-  "auto-resize":
-    "A small hook inspired by useAutoAnimate to simplify the animation I find myself reaching for often, but find more difficult to implement in my normal tailwind workflow",
-  enchrome:
-    "A password encryption chrome extension that provides an extra level of security for users at all levels of security consciousness",
   "rays.ai":
     "My first job! I built, deployed, and managed all parts of the website, the most significant of which was the graphical editor for optical design exploration with collaborative editing, unlimited undo/redo and a microservice written in golang for powering ray tracing computations",
   raybuild3r:
-    "a 3D continuation of my work at rays.ai as a favor to my boss and to take my Three.js skills to the moon. If I can figure out how to make textures look good this might be worth pursuing in prod"
+    "a 3D continuation of my work at rays.ai as a favor to my boss and to take my Three.js skills to the moon. If I can figure out how to make textures look good this might be worth pursuing in prod",
+  mesmery:
+    "A better Quizlet I made simply because they put my most used features behind a paywall T_T",
+  "auto-resize":
+    "A small hook inspired by useAutoAnimate to simplify the animation I find myself reaching for often, but find more difficult to implement in my normal tailwind workflow",
+  enchrome:
+    "A password encryption chrome extension that provides an extra level of security for users at all levels of security consciousness"
 };
 
 const ProjectIndex = () => {
@@ -37,7 +45,9 @@ const ProjectIndex = () => {
         );
       return (
         <Link
-          href={`/experimental/${project}`}
+          href={
+            project == "mesmery" ? `/${project}` : `/experimental/${project}`
+          }
           className="w-full group p-4 flex flex-col gap-2 rounded text-slate-400 hover:text-slate-200 hover:bg-slate-700 cursor-pointer transition-all border border-slate-900 hover:border-slate-500"
         >
           <div className="flex gap-[4px]">
