@@ -5,6 +5,7 @@ export default function Page() {
     <div className="md:pt-[10vh]">
       <SignUp
         signInUrl="/sign-in"
+        redirectUrl="/mesmery"
         appearance={{
           elements: {
             card: "bg-slate-300 text-slate-950",

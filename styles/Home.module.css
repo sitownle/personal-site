@@ -209,3 +209,45 @@
     transform: rotate(0deg);
   }
 }
+
+#mesmeryCard {
+  animation: 1s rotateCardX linear infinite;
+}
+
+#mesmeryCard2 {
+  visibility: visible;
+  animation: 1s rotateCardX2 linear infinite;
+}
+#mesmeryCard3 {
+  visibility: hidden;
+}
+#mesmeryCardWrong {
+  animation: 1s rotateCardXWrong linear infinite;
+}
+
+@keyframes rotateCardX {
+  from {
+    transform: rotateX(0deg) translateY(100%);
+  }
+  to {
+    transform: rotateX(360deg) translateY(-200%);
+  }
+}
+
+@keyframes rotateCardX2 {
+  from {
+    transform: rotateX(0deg) translateY(400%);
+  }
+  to {
+    transform: rotateX(360deg) translateY(-120%);
+  }
+}
+
+@keyframes rotateCardXWrong {
+  from {
+    transform: rotateX(0deg);
+  }
+  to {
+    transform: rotateX(-360deg);
+  }
+}

@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^4.15.0",
+    "@planetscale/database": "^1.7.0",
     "@react-three/drei": "^9.64.0",
     "@react-three/fiber": "^8.10.0",
     "@react-three/postprocessing": "^2.7.1",
@@ -19,6 +20,7 @@
     "@types/react-dom": "18.0.10",
     "@types/three": "^0.149.0",
     "@use-gesture/react": "^10.2.26",
+    "drizzle-orm": "^0.23.11",
     "eslint": "8.31.0",
     "eslint-config-next": "13.1.1",
     "next": "^13.3.0",
@@ -30,6 +32,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.13",
+    "drizzle-kit": "^0.17.4",
     "postcss": "^8.4.20",
     "tailwindcss": "^3.3.1"
   }
