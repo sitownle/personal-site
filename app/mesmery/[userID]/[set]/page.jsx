@@ -19,9 +19,7 @@ export default function MesmerySet(context, {}) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
   async function checkAnswer(answer) {
-    console.log(searchParams);
     const correct = searchParams.get("def");
-    console.log(correct);
     if (answer.toLowerCase() !== correct.toLowerCase()) {
       console.log("WRONG");
       setIsWrong(true);
