@@ -1,6 +1,6 @@
 // packages/core/db.ts
 import { drizzle } from "drizzle-orm/planetscale-serverless";
-
+import { InferModel } from "drizzle-orm";
 import { connect } from "@planetscale/database";
 import { sets, terms } from "./schema";
 
@@ -13,29 +13,66 @@ const connection = connect({
   password: process.env.PSCALE_PASSWORD
 });
 
+export type Set = InferModel<typeof sets>; // return type when queried
+export type NewSet = InferModel<typeof sets, "insert">; // insert type
+export type Term = InferModel<typeof terms>; // return type when queried
+export type NewTerm = InferModel<typeof terms, "insert">; // insert type
+
 export const db = drizzle(connection);
 
-export async function getSets(name: string) {
+export async function insertSet(set: NewSet) {
+  console.log(set);
+  //   const inserted = await connection.execute(
+  //     "INSERT INTO sets (name, owner) VALUES(?, ?)",
+  //     [set.name, set.owner]
+  //   );
+  const inserted = await db.insert(sets).values(set);
+  console.log(inserted);
+  return inserted;
+}
+
+export async function deleteSet(setID: number) {
+  console.log(setID);
+  const deleted = await db.delete(sets).where(eq(sets.id, setID));
+  console.log(deleted);
+  return deleted;
+}
+
+export async function updateSet(set: Set, newName: string) {
+  console.log(set, newName);
+  const updated = await db
+    .update(sets)
+    .set({ name: newName })
+    .where(eq(sets.id, set));
+  console.log(updated);
+  return updated;
+}
+
+export async function getSets(id: string) {
   const result = await db
     .select()
     .from(sets)
-    .where(eq(sets.owner, name));
+    .where(eq(sets.owner, id));
 
   if (result.length < 1) {
-    throw new Error(`No results found for counter ${name}`);
+    return [];
+    //throw new Error(`No sets found for user ${id}`);
   }
-
-  return result[0];
+  return result;
 }
 
-export async function getTerms(setName: string) {
+export async function insertTerms(terms: Term[]) {
+  return db.insert(terms).values(terms);
+}
+
+export async function getTerms(setID: string) {
   const result = await db
     .select()
     .from(terms)
-    .where(eq(terms.name, setName));
+    .where(eq(terms.setID, setID));
 
   if (result.length < 1) {
-    throw new Error(`No results found for set ${setName}`);
+    throw new Error(`No results found for set ${setID}`);
   }
 
   return result;

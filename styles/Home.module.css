@@ -212,6 +212,7 @@
 
 #mesmeryCard {
   animation: 1s rotateCardX linear infinite;
+  /*border-color: green;*/
 }
 
 #mesmeryCard2 {
@@ -222,15 +223,18 @@
   visibility: hidden;
 }
 #mesmeryCardWrong {
+  border-color: red;
   animation: 1s rotateCardXWrong linear infinite;
 }
 
 @keyframes rotateCardX {
   from {
     transform: rotateX(0deg) translateY(100%);
+    border-color: green;
   }
   to {
     transform: rotateX(360deg) translateY(-200%);
+    border-color: white;
   }
 }
 

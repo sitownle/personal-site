@@ -2,7 +2,8 @@
 const nextConfig = {
   reactStrictMode: true,
   experimental: {
-    appDir: true
+    appDir: true,
+    serverComponentsExternalPackages: ["mysql2"]
   },
   typescript: {
     ignoreBuildErrors: true

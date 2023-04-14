@@ -24,6 +24,6 @@ export const sets = mysqlTable(
 export const terms = mysqlTable("terms", {
   id: serial("id").primaryKey(),
   term: varchar("term", { length: 256 }),
-  definition: varchar("name", { length: 256 }),
+  definition: varchar("definition", { length: 256 }),
   setId: int("set_id").references(() => sets.id)
 });
