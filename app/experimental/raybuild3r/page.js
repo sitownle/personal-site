@@ -79,9 +79,11 @@ const Raybuild3r = () => {
     }
 
     function PositionRow({ isPosition }) {
-      const position = isPosition
-        ? useRayBuild3rStore(state => state.position)
-        : [0, 0, 0];
+      const position = /*isPosition
+        ? */ useRayBuild3rStore(
+        state => state.position
+      );
+      /*: [0, 0, 0];*/
       //const setPos = useRayBuild3rStore(state => state.setPos);
       // function setPosition(rawPos) {
       //   const fixedPos = [

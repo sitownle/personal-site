@@ -21,30 +21,20 @@ export type NewTerm = InferModel<typeof terms, "insert">; // insert type
 export const db = drizzle(connection);
 
 export async function insertSet(set: NewSet) {
-  console.log(set);
-  //   const inserted = await connection.execute(
-  //     "INSERT INTO sets (name, owner) VALUES(?, ?)",
-  //     [set.name, set.owner]
-  //   );
   const inserted = await db.insert(sets).values(set);
-  console.log(inserted);
   return inserted;
 }
 
 export async function deleteSet(setID: number) {
-  console.log(setID);
   const deleted = await db.delete(sets).where(eq(sets.id, setID));
-  console.log(deleted);
   return deleted;
 }
 
 export async function updateSet(set: Set, newName: string) {
-  console.log(set, newName);
   const updated = await db
     .update(sets)
     .set({ name: newName })
     .where(eq(sets.id, set));
-  console.log(updated);
   return updated;
 }
 

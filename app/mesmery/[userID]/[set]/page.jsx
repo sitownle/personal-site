@@ -1,9 +1,8 @@
 "use client";
 import { useState } from "react";
-import { useParams } from "next/navigation";
 import styles from "../../../../styles/Home.module.css";
 
-export default function mesmerySet(context) {
+export default function mesmerySet(context, {}) {
   //const params = useParams();
   //const set = params.set;
   const title = context.params.set;

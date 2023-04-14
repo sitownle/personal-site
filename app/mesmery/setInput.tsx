@@ -29,7 +29,7 @@ export default function SetInput({}) {
       body: JSON.stringify({ name: title, owner: user.id })
     }); //insertSet({ name: title, owner: user.id });
     console.log(insertedSet);
-    //router.push(`/mesmery/${isSignedIn ? user.id : "404"}/${title}`);
+    router.push(`/mesmery/${isSignedIn ? user.id : "404"}/${title}`);
   }
   return (
     <>
