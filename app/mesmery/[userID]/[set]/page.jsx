@@ -2,7 +2,7 @@
 import { useState } from "react";
 import styles from "../../../../styles/Home.module.css";
 
-export default function mesmerySet(context, {}) {
+export default function MesmerySet(context, {}) {
   //const params = useParams();
   //const set = params.set;
   const title = context.params.set;
