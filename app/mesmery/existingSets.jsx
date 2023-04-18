@@ -15,11 +15,11 @@ export default async function existingSets() {
           <div
             className="w-3/4 flex flex-row justify-center rounded-lg border border-slate-400/50 hover:bg-slate-400 hover:text-black transition-colors"
             key={index}
-            href={`/mesmery/${user.id}/${value.name}`}
+            href={`/mesmery/${user.id}/${value.id}`}
           >
             <Link
               className="w-full ml-auto cursor-pointer"
-              href={`/mesmery/${user.id}/${value.name}`}
+              href={`/mesmery/${user.id}/${value.id}`}
             >
               {value.name}
             </Link>

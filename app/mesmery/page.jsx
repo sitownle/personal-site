@@ -1,5 +1,3 @@
-import Link from "next/link";
-import { getSets, getTerms } from "./db.ts";
 import SetInput from "./setInput.tsx";
 import ExistingSets from "./existingSets";
 

@@ -1,6 +1,7 @@
 // schema.ts
 import {
   int,
+  bigint,
   mysqlEnum,
   mysqlTable,
   serial,
@@ -27,9 +28,9 @@ export const terms = mysqlTable(
     id: serial("id").primaryKey(),
     term: varchar("term", { length: 256 }),
     definition: varchar("definition", { length: 256 }),
-    set_id: int("set_id").references(() => sets.id)
-  },
-  terms => ({
-    set_idIndex: uniqueIndex("idx_set_id").on(terms.set_id)
-  })
+    set_id: int("set_id").notNull() /*references(() => sets.id)*/
+  }
+  //   ,terms => ({
+  //     set_idIndex: uniqueIndex("idx_set_id").on(terms.set_id)
+  //   })
 );

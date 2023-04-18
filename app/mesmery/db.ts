@@ -21,20 +21,18 @@ export type NewTerm = InferModel<typeof terms, "insert">; // insert type
 
 export const db = drizzle(connection);
 
-export async function insertSet(set: NewSet, terms: NewTerm[]) {
+export async function insertSet(set: NewSet, newterms: NewTerm[]) {
   const inserted = await db.insert(sets).values(set);
-  console.log("INSERTED!!", inserted.insertId);
-  for (let i = 0; i < terms.length; i++) {
-    terms[i].set_id = inserted.insertId;
-  }
-  console.log("SET ID TEST:", terms[0].set_id);
-  //const insertedTerms = await db.insert(terms).values(terms);
+  for (let i = 0; i < newterms.length; i++)
+    newterms[i].set_id = inserted.insertId;
+  const insertedTerms = await db.insert(terms).values(newterms);
   return inserted;
 }
 
 export async function deleteSet(setID: number) {
   const deleted = await db.delete(sets).where(eq(sets.id, setID));
-  const deletedTerms = await db.delete(terms).where(eq(terms.setID, setID));
+  const deletedTerms = await db.delete(terms).where(eq(terms.set_id, setID));
+  //const temp = await db.delete(terms).where(eq(terms.set_id, 0));
   return deleted;
 }
 
@@ -46,11 +44,11 @@ export async function updateSet(set: Set, newName: string) {
   return updated;
 }
 
-export async function getSets(id: string) {
+export async function getSets(user_id: string) {
   const result = await db
     .select()
     .from(sets)
-    .where(eq(sets.owner, id));
+    .where(eq(sets.owner, user_id));
 
   if (result.length < 1) {
     return [];
@@ -59,18 +57,36 @@ export async function getSets(id: string) {
   return result;
 }
 
-// export async function insertTerms(terms: Term[]) {
-//   return db.insert(terms).values(terms);
+export async function getSet(id: string) {
+  const result = await db
+    .select()
+    .from(sets)
+    .where(eq(sets.id, id));
+
+  if (result.length < 1) {
+    return [];
+    //throw new Error(`No sets found for user ${id}`);
+  }
+  return result[0];
+}
+
+// export async function insertTerms(newterms: NewTerm[]) {
+//   return db.insert(terms).values(newterms);
 // }
 
-export async function getTerms(setID: string) {
+export async function getTerms(setID: number) {
+  console.log(setID);
+  const tempres = await db.select().from(terms);
+  console.log(tempres);
   const result = await db
     .select()
     .from(terms)
-    .where(eq(terms.setID, setID));
+    .where(eq(terms.set_id, setID));
 
   if (result.length < 1) {
-    throw new Error(`No results found for set ${setID}`);
+    console.log("EMPTY RESULT");
+    return [];
+    //throw new Error(`No terms found for set ${setID}`);
   }
 
   return result;
