@@ -16,7 +16,9 @@ export default function SetInput({}) {
     console.log(cards);
     const terms = [];
     for (let i = 0; i < cards.length; i++) {
-      terms.push([...cards[i].split(parseSetting)]);
+      const full = cards[i].split(parseSetting);
+      //terms.push([...cards[i].split(parseSetting)]);
+      terms.push({ term: full[0], definition: full[1], set_id: 0 });
     }
     console.log(title);
     console.log(terms);
@@ -26,11 +28,13 @@ export default function SetInput({}) {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ name: title, owner: user.id })
+      body: JSON.stringify([{ name: title, owner: user.id }, terms])
     }); //insertSet({ name: title, owner: user.id });
-    console.log(insertedSet);
-    router.push(`/mesmery/${isSignedIn ? user.id : "404"}/${title}`);
+    const finalSet = await insertedSet.json();
+    console.log("finalSet: ", finalSet);
+    router.push(`/mesmery/${isSignedIn ? user.id : "404"}/${finalSet.id}`);
   }
+
   return (
     <>
       <div>Import a new set:</div>
@@ -66,7 +70,7 @@ export default function SetInput({}) {
         ref={setRef}
         placeholder={"Paste Quizlet export here"}
         spellCheck={false}
-        className="w-3/4 bg-slate-600 rounded-lg border border-slate-500/30 p-2 text-slate-200/75 text-xs"
+        className="h-[25vh] w-3/4 bg-slate-600 rounded-lg border border-slate-500/30 p-2 text-slate-200/75 text-xs"
       />
       <button
         className="w-1/2 text-slate-200 text-sm px-2 border border-slate-800 rounded bg-gradient-to-l from-slate-700 to-black shadow-md hover:bg-gradient-to-r hover:from-slate-700 hover:to-black hover:text-slate-400 transition-colors"

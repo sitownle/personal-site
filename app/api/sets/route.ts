@@ -3,9 +3,10 @@ import { insertSet, deleteSet, updateSet } from "../../mesmery/db";
 
 export async function POST(request: Request) {
   const req = await request.json();
-  const res = await insertSet(req);
-  req.id = res.insertId;
-  return NextResponse.json(req);
+  const res = await insertSet(req[0], req[1]);
+  req[0].id = res.insertId;
+  console.log(req[0]);
+  return NextResponse.json(req[0]);
 }
 
 export async function DELETE(request: Request) {

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { UserButton } from "@clerk/nextjs/app-beta";
 
 export default function Header() {
   return (
@@ -15,6 +16,21 @@ export default function Header() {
       >
         {"Projects"}
       </Link>
+      <UserButton
+        showName
+        signInUrl={"/sign-in"}
+        userProfileMode={"modal"}
+        afterSignOutUrl={"/"}
+        appearance={{
+          elements: {
+            rootBox: "ml-auto pr-4",
+            userButtonOuterIdentifier: "text-slate-300",
+            //userButtonTrigger: "shadow-slate-300",
+            userButtonPopoverCard: "text-slate-950 bg-slate-400",
+            userButtonPopoverFooter: "text-slate-200"
+          }
+        }}
+      />
     </div>
   );
 }

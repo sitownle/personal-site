@@ -21,9 +21,15 @@ export const sets = mysqlTable(
   //   })
 );
 
-export const terms = mysqlTable("terms", {
-  id: serial("id").primaryKey(),
-  term: varchar("term", { length: 256 }),
-  definition: varchar("definition", { length: 256 }),
-  setId: int("set_id").references(() => sets.id)
-});
+export const terms = mysqlTable(
+  "terms",
+  {
+    id: serial("id").primaryKey(),
+    term: varchar("term", { length: 256 }),
+    definition: varchar("definition", { length: 256 }),
+    set_id: int("set_id").references(() => sets.id)
+  },
+  terms => ({
+    set_idIndex: uniqueIndex("idx_set_id").on(terms.set_id)
+  })
+);

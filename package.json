@@ -9,10 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@clerk/nextjs": "^4.15.0",
+    "@clerk/nextjs": "^4.16.2",
     "@planetscale/database": "^1.7.0",
-    "@react-three/drei": "^9.64.0",
-    "@react-three/fiber": "^8.10.0",
+    "@react-three/drei": "^9.65.3",
+    "@react-three/fiber": "^8.12.1",
     "@react-three/postprocessing": "^2.7.1",
     "@sitownle/use-auto-resize": "^1.1.1",
     "@types/node": "18.11.18",
@@ -20,7 +20,7 @@
     "@types/react-dom": "18.0.10",
     "@types/three": "^0.149.0",
     "@use-gesture/react": "^10.2.26",
-    "drizzle-orm": "^0.23.11",
+    "drizzle-orm": "^0.24.0",
     "eslint": "8.31.0",
     "eslint-config-next": "13.1.1",
     "mysql2": "^3.2.0",

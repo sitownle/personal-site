@@ -48,6 +48,7 @@ const ProjectIndex = () => {
           href={
             project == "mesmery" ? `/${project}` : `/experimental/${project}`
           }
+          prefetch={project == "mesmery" ? false : true}
           className="w-full group p-4 flex flex-col gap-2 rounded text-slate-400 hover:text-slate-200 hover:bg-slate-700 cursor-pointer transition-all border border-slate-900 hover:border-slate-500"
         >
           <div className="flex gap-[4px]">

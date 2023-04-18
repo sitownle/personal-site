@@ -17,16 +17,24 @@ export type Set = InferModel<typeof sets>; // return type when queried
 export type NewSet = InferModel<typeof sets, "insert">; // insert type
 export type Term = InferModel<typeof terms>; // return type when queried
 export type NewTerm = InferModel<typeof terms, "insert">; // insert type
+//export type TestTerm = { term: string; definition: string; set_id?: number };
 
 export const db = drizzle(connection);
 
-export async function insertSet(set: NewSet) {
+export async function insertSet(set: NewSet, terms: NewTerm[]) {
   const inserted = await db.insert(sets).values(set);
+  console.log("INSERTED!!", inserted.insertId);
+  for (let i = 0; i < terms.length; i++) {
+    terms[i].set_id = inserted.insertId;
+  }
+  console.log("SET ID TEST:", terms[0].set_id);
+  //const insertedTerms = await db.insert(terms).values(terms);
   return inserted;
 }
 
 export async function deleteSet(setID: number) {
   const deleted = await db.delete(sets).where(eq(sets.id, setID));
+  const deletedTerms = await db.delete(terms).where(eq(terms.setID, setID));
   return deleted;
 }
 
@@ -51,9 +59,9 @@ export async function getSets(id: string) {
   return result;
 }
 
-export async function insertTerms(terms: Term[]) {
-  return db.insert(terms).values(terms);
-}
+// export async function insertTerms(terms: Term[]) {
+//   return db.insert(terms).values(terms);
+// }
 
 export async function getTerms(setID: string) {
   const result = await db
@@ -67,13 +75,3 @@ export async function getTerms(setID: string) {
 
   return result;
 }
-
-// export async function increaseCounter(name: string) {
-//   await db
-//     .update(counters)
-//     .set({
-//       tally: sql`${counters.tally}
-//             + 1`
-//     })
-//     .where(eq(counters.counter, name));
-// }
